@@ -14,7 +14,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let pokémonView = PokemonView(frame : CGRect (x : 0, y : 0, width : 100, height : 100) )
+        
+        pokémonView.pokemonName(name: "bulbasaur")
+        
+        pokémonView.center = view.center
+        
+        view.addSubview(pokémonView)
+        
+    }
+    
+    
 
 
 }
-

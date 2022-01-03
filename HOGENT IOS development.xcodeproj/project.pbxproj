@@ -13,6 +13,9 @@
 		A6B04EB527839FC900BD6628 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6B04EB327839FC900BD6628 /* Main.storyboard */; };
 		A6B04EB727839FC900BD6628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6B04EB627839FC900BD6628 /* Assets.xcassets */; };
 		A6B04EBA27839FC900BD6628 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6B04EB827839FC900BD6628 /* LaunchScreen.storyboard */; };
+		A6B04EC62783A7C400BD6628 /* PokemonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EC52783A7C400BD6628 /* PokemonView.swift */; };
+		A6B04EC82783BA0E00BD6628 /* PokemonGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EC72783BA0E00BD6628 /* PokemonGenerator.swift */; };
+		A6B04ECA2783BBA600BD6628 /* Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EC92783BBA600BD6628 /* Structures.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		A6B04EB627839FC900BD6628 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6B04EB927839FC900BD6628 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A6B04EBB27839FC900BD6628 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6B04EC52783A7C400BD6628 /* PokemonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonView.swift; sourceTree = "<group>"; };
+		A6B04EC72783BA0E00BD6628 /* PokemonGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonGenerator.swift; sourceTree = "<group>"; };
+		A6B04EC92783BBA600BD6628 /* Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structures.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 				A6B04EB627839FC900BD6628 /* Assets.xcassets */,
 				A6B04EB827839FC900BD6628 /* LaunchScreen.storyboard */,
 				A6B04EBB27839FC900BD6628 /* Info.plist */,
+				A6B04EC52783A7C400BD6628 /* PokemonView.swift */,
+				A6B04EC72783BA0E00BD6628 /* PokemonGenerator.swift */,
+				A6B04EC92783BBA600BD6628 /* Structures.swift */,
 			);
 			path = "HOGENT IOS development";
 			sourceTree = "<group>";
@@ -138,6 +147,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6B04EC82783BA0E00BD6628 /* PokemonGenerator.swift in Sources */,
+				A6B04ECA2783BBA600BD6628 /* Structures.swift in Sources */,
+				A6B04EC62783A7C400BD6628 /* PokemonView.swift in Sources */,
 				A6B04EB227839FC900BD6628 /* ViewController.swift in Sources */,
 				A6B04EAE27839FC900BD6628 /* AppDelegate.swift in Sources */,
 				A6B04EB027839FC900BD6628 /* SceneDelegate.swift in Sources */,
