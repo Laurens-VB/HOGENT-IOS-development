@@ -8,61 +8,85 @@
 
 import UIKit
 
-class PokemonView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+class PokemonView: UIView
+{
+    //MOET ERGENS EEN VEEL BETERE PLAATS KRIJGEN IS SCHANDALIG DAT DIT HIER STAAT
+    var counter = 0
     
-    private let label : UILabel =
+
+    private let imageViewEnemy : UIImageView =
     {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.backgroundColor = .black
-        label.textColor = .white
-        return label
+        let imageViewEnemy = UIImageView()
+        return imageViewEnemy
+    }()
+    
+    private let imageViewAly : UIImageView =
+    {
+        let imageViewAly = UIImageView()
+        return imageViewAly
     }()
     
     override init(frame : CGRect)
     {
         super.init(frame : frame)
-        backgroundColor = .green
-        
-        //Label als subview toevoegen
-        addSubview(label)
+        backgroundColor = .cyan
     }
     
-    required init?(coder: NSCoder)
-    {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //Hier komt de layout code voor de label
     override func layoutSubviews()
     {
-        label.frame = CGRect (
-            x : 10
-            , y : 10
-            , width : frame.size.width - 20
-            , height : frame.size.height - 20
+        imageViewEnemy.frame = CGRect(
+            x : frame.size.width - 100
+            , y : 0
+            , width: 100
+            , height: 100
         )
+        
+        imageViewAly.frame = CGRect(
+            x : 0
+            , y : frame.size.height - 100
+            , width : 100
+            , height : 100
+        )
+        
+        addSubview(imageViewEnemy)
+        addSubview(imageViewAly)
     }
     
-    public func pokemonName(name : String)
+    //Volgens https://medium.com/swlh/loading-images-from-url-in-swift-2bf8b9db266
+    private func setImage(from url : String, isEnemy : Bool) -> Void
     {
-        label.text = name
+        guard let imageURL = URL(string: url) else { return }
+
+        // just not to cause a deadlock in UI!
+        DispatchQueue.global().async
+        {
+            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+
+            let image = UIImage(data: imageData)
+            DispatchQueue.main.async
+            {
+                if isEnemy
+                {
+                    self.imageViewEnemy.image = image
+                    
+                }
+                else
+                {
+                    self.imageViewAly.image = image
+                }
+                
+            }
+        }
     }
     
-    /*
-    private let image : UIImageView =
+    func setImagePokemons(pokemons : [Pokemon])
     {
-        let image = UIImageView()
-        image.
-        return image
-    }()
-    */
+        setImage(from : pokemons[0].sprites.back_default, isEnemy : false)
+        setImage(from : pokemons[1].sprites.front_default, isEnemy : true)
+        
+    }
 }

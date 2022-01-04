@@ -32,7 +32,9 @@ class PokemonGenerator
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField : "Content-Type")
         
-        var pokemon : Pokemon = Pokemon(name : "")
+        var pokemon : Pokemon = Pokemon(name : ""
+            , sprites : Pokemon.Sprites(back_default: "", front_default: "")
+        )
         
         //Aanmaken & instellen van de task, taak die we met het request wensen uit te voeren:
         let task = URLSession.shared.dataTask(with: request)
@@ -57,9 +59,10 @@ class PokemonGenerator
         
         task.resume()
         
+        //Temp solution om resume() te stallen tot wanneer de data is opgevraagt!
         repeat { } while pokemon.name == ""
         
-        print(pokemon)
+        print(pokemon.sprites.back_default)
         return pokemon
     }
     
