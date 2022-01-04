@@ -11,7 +11,7 @@ import Foundation
 //Models
 struct Pokemon : Codable
 {
-    let name : String
+    var name : String
     //let sprites : Sprites
     //let stats : Stats
     //let moves: [Moves]
