@@ -19,6 +19,7 @@
 		A6B04ED52786633B00BD6628 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04ED42786633B00BD6628 /* LaunchViewController.swift */; };
 		A6B04ED927868D3700BD6628 /* PokemonSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04ED827868D3700BD6628 /* PokemonSelectionView.swift */; };
 		A6B04EDB278692E400BD6628 /* PokemonSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EDA278692E400BD6628 /* PokemonSelectionViewController.swift */; };
+		A6B04EDD2786A65300BD6628 /* PokemonSpriteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EDC2786A65300BD6628 /* PokemonSpriteHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		A6B04ED42786633B00BD6628 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		A6B04ED827868D3700BD6628 /* PokemonSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSelectionView.swift; sourceTree = "<group>"; };
 		A6B04EDA278692E400BD6628 /* PokemonSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSelectionViewController.swift; sourceTree = "<group>"; };
+		A6B04EDC2786A65300BD6628 /* PokemonSpriteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSpriteHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				A6B04EC72783BA0E00BD6628 /* PokemonGenerator.swift */,
+				A6B04EDC2786A65300BD6628 /* PokemonSpriteHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				A6B04EDB278692E400BD6628 /* PokemonSelectionViewController.swift in Sources */,
 				A6B04EB227839FC900BD6628 /* PokemonBattleViewController.swift in Sources */,
 				A6B04EAE27839FC900BD6628 /* AppDelegate.swift in Sources */,
+				A6B04EDD2786A65300BD6628 /* PokemonSpriteHelper.swift in Sources */,
 				A6B04EB027839FC900BD6628 /* SceneDelegate.swift in Sources */,
 				A6B04ED52786633B00BD6628 /* LaunchViewController.swift in Sources */,
 			);
