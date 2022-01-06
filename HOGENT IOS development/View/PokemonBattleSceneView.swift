@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PokemonBattleView: UIView
+class PokemonBattleSceneView: UIView
 {
     //MOET ERGENS EEN VEEL BETERE PLAATS KRIJGEN IS SCHANDALIG DAT DIT HIER STAAT
     var counter = 0

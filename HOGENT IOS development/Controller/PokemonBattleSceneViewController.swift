@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class PokemonBattleViewController: UIViewController
+class PokemonBattleSceneViewController: UIViewController
 {
     let pokemonGenerator : PokemonGenerator = PokemonGenerator()
     
@@ -35,7 +35,7 @@ class PokemonBattleViewController: UIViewController
         //let pokemon = pokemons[0]
         let screenSize: CGRect = UIScreen.main.bounds
         
-        let pokémonView = PokemonBattleView(frame : CGRect (x : 0, y : 0,  width : (screenSize.width) , height : (screenSize.height/2) ) )
+        let pokémonView = PokemonBattleSceneView(frame : CGRect (x : 0, y : 0,  width : (screenSize.width) , height : (screenSize.height/2) ) )
         
         //pokémonView.generateButtons(pokemons: pokemons)
         

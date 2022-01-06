@@ -75,9 +75,10 @@ class PokemonSelectionViewController: UIViewController
     
     @objc func confirmPressed()
     {
-        let pokemonBattleViewController = PokemonBattleViewController()
-        present(pokemonBattleViewController, animated: true, completion:  nil)
-        print("hehehehehehe")
+        let pokemonBattleSceneViewController = PokemonBattleSceneViewController()
+        let pokemonBattleOptionsViewController = PokemonBattleOptionsViewController()
+        present(pokemonBattleSceneViewController, animated: true, completion:  nil)
+        //present(pokemonBattleOptionsViewController, animated: true, completion: nil)
     }
     
     @objc func rerollPressed()
