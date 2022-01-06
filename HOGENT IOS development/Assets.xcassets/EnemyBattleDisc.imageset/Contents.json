@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Pikachu.png",
+      "filename" : "EnemyDiscTransparent.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Pikachu-1.png",
+      "filename" : "EnemyDiscTransparent-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Pikachu-2.png",
+      "filename" : "EnemyDiscTransparent-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -42,17 +42,10 @@ class LaunchViewController: UIViewController {
         print("PAIN")
     }
     
-    @objc func okPressed(_ sender : Any)
+    @objc func okPressed()
     {
-        let screenSize: CGRect = UIScreen.main.bounds
-        
         let pokémonViewController = PokemonSelectionViewController()
         present(pokémonViewController, animated: true, completion:  nil)
-        
-        /*let pokemonVC = PokemonBattleViewController()
-        present(pokemonVC, animated: true, completion: nil)*/
-        
-        print("ButtonClicked")
     }
 
 }

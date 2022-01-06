@@ -32,6 +32,7 @@ class PokemonSelectionViewController: UIViewController
     
     override func viewDidLayoutSubviews()
     {
+        print("ViewDidLayout runned")
         for imageView in pokemonSelectionView.getImageViews()
         {
             //Volgens https://stackoverflow.com/questions/27880607/how-to-assign-an-action-for-uiimageview-object-in-swift
@@ -40,11 +41,16 @@ class PokemonSelectionViewController: UIViewController
             imageView.isUserInteractionEnabled = true
             imageView.addGestureRecognizer(tapGestureRecognizer)
         }
+        
+        pokemonSelectionView.buttonConfirm.addTarget(self, action: #selector(confirmPressed), for: .touchUpInside )
+        
+        pokemonSelectionView.buttonReroll.addTarget(self, action: #selector(rerollPressed), for: .touchUpInside )
     }
     
     //Skelet functie volgens https://stackoverflow.com/questions/27880607/how-to-assign-an-action-for-uiimageview-object-in-swift
     @objc func imageTapped(tapGestureRecognizer : UITapGestureRecognizer)
     {
+        print("heh")
         let colorPicked = UIColor(red : 0.219, green : 0.560, blue : 0.321, alpha : 1).cgColor
         
         let tappedImage = tapGestureRecognizer.view as! UIImageView
@@ -65,8 +71,18 @@ class PokemonSelectionViewController: UIViewController
             return
             
         }
-        
-        
+    }
+    
+    @objc func confirmPressed()
+    {
+        let pokemonBattleViewController = PokemonBattleViewController()
+        present(pokemonBattleViewController, animated: true, completion:  nil)
+        print("hehehehehehe")
+    }
+    
+    @objc func rerollPressed()
+    {
+        pokemonSelectionView.generateButtons()
     }
     /*
     // MARK: - Navigation

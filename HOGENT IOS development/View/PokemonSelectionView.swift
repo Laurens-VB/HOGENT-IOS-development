@@ -21,6 +21,21 @@ class PokemonSelectionView: UIView {
     var amount : Int = 3
     var imageViews : [UIImageView] = []
     
+    let buttonConfirm : UIButton =
+    {
+        let buttonConfirm = UIButton()
+        buttonConfirm.backgroundColor = .systemGreen
+        buttonConfirm.setTitle("Confirm Selection", for : .normal)
+        return buttonConfirm
+    }()
+    
+    let buttonReroll : UIButton =
+    {
+        let buttonReroll = UIButton()
+        buttonReroll.backgroundColor = .systemRed
+        buttonReroll.setTitle("Reroll Pokémon", for : .normal)
+        return buttonReroll
+    }()
     override init(frame : CGRect)
     {
         super.init(frame : frame)
@@ -33,6 +48,24 @@ class PokemonSelectionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews()
+    {
+        buttonConfirm.frame = CGRect(
+            x: (Int(frame.size.width)/2) - (200/2)
+            , y : (Int(frame.size.height)/4)*3 - (50/2)
+            , width: 200
+            , height: 50
+        )
+        addSubview(buttonConfirm)
+        
+        buttonReroll.frame = CGRect(
+            x: (Int(frame.size.width)/2) - (200/2)
+            , y : Int(buttonConfirm.frame.maxY + 20)
+            , width: 200
+            , height: 50
+        )
+        addSubview(buttonReroll)
+    }
     func getAmount() -> Int
     {
         return amount
@@ -45,6 +78,7 @@ class PokemonSelectionView: UIView {
     
     func generateButtons() -> Void
     {
+        //var imageViews : [UIImageView] = []
         print("Generate Buttons Called!")
         
         var isOneven : Bool = true
@@ -57,8 +91,6 @@ class PokemonSelectionView: UIView {
         do {
             pokemons = try pokemonGenerator.genneratePokémons(amount : self.amount)
         } catch is Error {  }
-        
-        
         
         //buttons = [UIButton, UIButton, UIButton, UIButton, UIButton, UIButton]
         for index in 1...self.amount
@@ -85,7 +117,7 @@ class PokemonSelectionView: UIView {
             {
                 imageView.frame = CGRect(
                     x : (Int(frame.size.width)/4) - (95/2)
-                    , y : (Int(frame.size.width)/3) * yMultiplier - (95/2)
+                    , y : (Int(frame.size.height)/6) * yMultiplier - (95/2)
                     , width: 95
                     , height: 95
                 )
@@ -95,7 +127,7 @@ class PokemonSelectionView: UIView {
             {
                 imageView.frame = CGRect(
                     x : (Int(frame.size.width)/4)*3 - (95/2)
-                    , y : (Int(frame.size.width)/3) * yMultiplier - (95/2)
+                    , y : (Int(frame.size.height)/6) * yMultiplier - (95/2)
                     , width: 95
                     , height: 95
                 )
