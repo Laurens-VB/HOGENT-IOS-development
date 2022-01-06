@@ -8,19 +8,19 @@
 
 import UIKit
 
-class PokemonView: UIView
+class PokemonBattleView: UIView
 {
     //MOET ERGENS EEN VEEL BETERE PLAATS KRIJGEN IS SCHANDALIG DAT DIT HIER STAAT
     var counter = 0
     
 
-    private let imageViewEnemy : UIImageView =
+    private var imageViewEnemy : UIImageView =
     {
         let imageViewEnemy = UIImageView()
         return imageViewEnemy
     }()
     
-    private let imageViewAly : UIImageView =
+    private var imageViewAly : UIImageView =
     {
         let imageViewAly = UIImageView()
         return imageViewAly
@@ -56,37 +56,16 @@ class PokemonView: UIView
         addSubview(imageViewAly)
     }
     
-    //Volgens https://medium.com/swlh/loading-images-from-url-in-swift-2bf8b9db266
-    private func setImage(from url : String, isEnemy : Bool) -> Void
-    {
-        guard let imageURL = URL(string: url) else { return }
-
-        // just not to cause a deadlock in UI!
-        DispatchQueue.global().async
-        {
-            guard let imageData = try? Data(contentsOf: imageURL) else { return }
-
-            let image = UIImage(data: imageData)
-            DispatchQueue.main.async
-            {
-                if isEnemy
-                {
-                    self.imageViewEnemy.image = image
-                    
-                }
-                else
-                {
-                    self.imageViewAly.image = image
-                }
-                
-            }
-        }
-    }
-    
     func setImagePokemons(pokemons : [Pokemon])
     {
-        setImage(from : pokemons[0].sprites.back_default, isEnemy : false)
-        setImage(from : pokemons[1].sprites.front_default, isEnemy : true)
+        let pokemonSpriteHelper :PokemonSpriteHelper = PokemonSpriteHelper()
         
+        do
+        {
+            try imageViewAly = pokemonSpriteHelper.setImage(from : pokemons[0].sprites!.back_default!)!
+            
+            try imageViewEnemy = pokemonSpriteHelper.setImage(from : pokemons[1].sprites!.front_default!)!
+        }
+        catch is Error { }
     }
 }

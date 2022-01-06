@@ -12,13 +12,13 @@ import Foundation
 struct Pokemon : Codable
 {
     var name : String
-    var sprites : Sprites
+    var sprites : Sprites?
     //let stats : Stats
     //let moves: [Moves]
     
     struct Sprites : Codable
     {
-        let back_default, front_default : String
+        let back_default, front_default : String?
     }
     
     struct Stats : Codable

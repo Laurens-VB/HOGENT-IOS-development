@@ -61,8 +61,6 @@ class PokemonGenerator
         
         //Temp solution om resume() te stallen tot wanneer de data is opgevraagt!
         repeat { } while pokemon.name == ""
-        
-        print(pokemon.sprites.back_default)
         return pokemon
     }
     
@@ -74,8 +72,24 @@ class PokemonGenerator
         {
             //Random getal genereren tussen 1 en 898, 1 included, 898 included
             //TO CHECK!
-            try pokemons.append(requestPokémon( entry :  Int.random(in: 1...898 ) ) )
+            do
+            {
+                var entry = Int.random(in: 1...898)
+                //print(entry)
+                var pokemon = try requestPokémon( entry :  entry)
+                repeat
+                {
+                    entry = Int.random(in: 1...898)
+                    pokemon = try requestPokémon( entry :  entry )
+                }
+                    while( pokemon.sprites?.front_default == nil || pokemon.sprites?.back_default == nil )
+
+                pokemons.append(pokemon)
+                
+            } catch is Error { }
         }
+
+        print(pokemons.count)
         
         return pokemons
     }

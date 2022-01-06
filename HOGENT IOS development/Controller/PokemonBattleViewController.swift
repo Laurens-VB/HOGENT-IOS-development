@@ -7,7 +7,8 @@
 //
 
 import UIKit
-class ViewController: UIViewController {
+class PokemonBattleViewController: UIViewController
+{
     let pokemonGenerator : PokemonGenerator = PokemonGenerator()
     
     override func viewDidLoad() {
@@ -33,19 +34,17 @@ class ViewController: UIViewController {
         //let pokemon = pokemons[0]
         let screenSize: CGRect = UIScreen.main.bounds
         
-        let pokémonView = PokemonView(frame : CGRect (x : 0, y : 0,  width : screenSize.width - 20, height : screenSize.height/2 - 40) )
+        let pokémonView = PokemonBattleView(frame : CGRect (x : 20, y : 20,  width : (screenSize.width)-40 , height : (screenSize.height/2)-20 ) )
         
         //pokémonView.generateButtons(pokemons: pokemons)
         
-        pokémonView.center = view.center
+        //pokémonView.center = view.center
         
         /*pokémonView.setImage(from: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/483.png")*/
         
         pokémonView.setImagePokemons(pokemons: pokemons)
         
         view.addSubview(pokémonView)
-        
-        print("pain knows the world")
     }
     
     
