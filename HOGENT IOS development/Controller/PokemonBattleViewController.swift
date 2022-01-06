@@ -16,7 +16,8 @@ class PokemonBattleViewController: UIViewController
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidLayoutSubviews() {
+    override func viewDidLayoutSubviews()
+    {
         super.viewDidLayoutSubviews()
         
         var pokemons : [Pokemon] = [Pokemon]()
@@ -34,7 +35,7 @@ class PokemonBattleViewController: UIViewController
         //let pokemon = pokemons[0]
         let screenSize: CGRect = UIScreen.main.bounds
         
-        let pokémonView = PokemonBattleView(frame : CGRect (x : 20, y : 20,  width : (screenSize.width) , height : (screenSize.height/2) ) )
+        let pokémonView = PokemonBattleView(frame : CGRect (x : 0, y : 0,  width : (screenSize.width) , height : (screenSize.height/2) ) )
         
         //pokémonView.generateButtons(pokemons: pokemons)
         

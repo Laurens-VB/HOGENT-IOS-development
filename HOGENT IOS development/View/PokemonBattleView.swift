@@ -26,6 +26,24 @@ class PokemonBattleView: UIView
         return imageViewAly
     }()
     
+    private var imageViewAlyDisc : UIImageView =
+    {
+        let imageViewAlyDisc = UIImageView( image : UIImage(named : "AlyBattleDisc") )
+        return imageViewAlyDisc
+    }()
+    
+    private var imageViewEnemyDisc : UIImageView =
+    {
+        let imageViewEnemyDisc = UIImageView( image : UIImage(named : "EnemyBattleDisc") )
+        return imageViewEnemyDisc
+    }()
+    
+    private var imageViewBattleBackDrop : UIImageView =
+    {
+        let imageViewEnemyDisc = UIImageView( image : UIImage(named : "BattleBackdrop") )
+        return imageViewEnemyDisc
+    }()
+    
     override init(frame : CGRect)
     {
         super.init(frame : frame)
@@ -38,22 +56,47 @@ class PokemonBattleView: UIView
     
     override func layoutSubviews()
     {
-        imageViewEnemy.frame = CGRect(
-            x : frame.size.width - 100
+        imageViewBattleBackDrop.frame = CGRect(
+            x : 0
             , y : 0
-            , width: 100
-            , height: 100
+            , width : frame.size.width
+            , height : frame.size.height
         )
         
-        imageViewAly.frame = CGRect(
+        imageViewAlyDisc.frame = CGRect(
             x : 0
             , y : frame.size.height - 100
-            , width : 100
+            , width : 300
             , height : 100
         )
         
+        imageViewEnemyDisc.frame = CGRect(
+            x : frame.size.width - 270
+            , y : 62.5
+            , width : 270
+            , height : 90
+        )
+        
+        imageViewAly.frame = CGRect(
+            x : imageViewAlyDisc.frame.maxX/4
+            , y : frame.size.height - 150
+            , width : 150
+            , height : 150
+        )
+        
+        imageViewEnemy.frame = CGRect(
+            x : frame.size.width - 150 - (imageViewEnemyDisc.frame.maxX/8)
+            , y : 62.5 - (90/2)
+            , width: 125
+            , height: 125
+        )
+        
+        addSubview(imageViewBattleBackDrop)
+        addSubview(imageViewAlyDisc)
+        addSubview(imageViewEnemyDisc)
         addSubview(imageViewEnemy)
         addSubview(imageViewAly)
+        
     }
     
     func setImagePokemons(pokemons : [Pokemon])
