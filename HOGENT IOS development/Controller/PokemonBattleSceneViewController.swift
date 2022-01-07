@@ -35,17 +35,14 @@ class PokemonBattleSceneViewController: UIViewController
         //let pokemon = pokemons[0]
         let screenSize: CGRect = UIScreen.main.bounds
         
-        let pokémonView = PokemonBattleSceneView(frame : CGRect (x : 0, y : 0,  width : (screenSize.width) , height : (screenSize.height/2) ) )
-        
         //pokémonView.generateButtons(pokemons: pokemons)
         
         //pokémonView.center = view.center
         
         /*pokémonView.setImage(from: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/483.png")*/
         
-        pokémonView.setImagePokemons(pokemons: pokemons)
-        
-        view.addSubview(pokémonView)
+        //pokémonView.setImagePokemons(pokemons: pokemons)
+         //       view.addSubview(pokémonView)
     }
     
     

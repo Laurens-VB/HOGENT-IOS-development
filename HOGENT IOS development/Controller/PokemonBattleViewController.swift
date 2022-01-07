@@ -1,5 +1,5 @@
 //
-//  PokemonBattleOptionsViewController.swift
+//  PokemonBattleViewController.swift
 //  HOGENT IOS development
 //
 //  Created by LaurensVB on 06/01/2022.
@@ -8,9 +8,8 @@
 
 import UIKit
 
-class PokemonBattleOptionsViewController: UIViewController
+class PokemonBattleViewController: UIViewController
 {
-
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -32,6 +31,5 @@ class PokemonBattleOptionsViewController: UIViewController
     {
         super.viewDidLoad()
         view.addSubview(pokemonBattleView)
-        //view.addSubview(pokemonBattleOptionsView)
     }
 }

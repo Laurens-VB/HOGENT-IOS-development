@@ -10,11 +10,7 @@ import UIKit
 
 class PokemonSelectionViewController: UIViewController
 {
-    //@IBOutlet weak var imageViews : [UIImageView]!
-
-    //Andere plaats zoeken!
     var amountPicked = 0
-    
     
     let pokemonSelectionView : PokemonSelectionView  = PokemonSelectionView(frame : CGRect (x : 0, y : 0,  width : UIScreen.main.bounds.width , height : UIScreen.main.bounds.height))
     
@@ -22,12 +18,9 @@ class PokemonSelectionViewController: UIViewController
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        
         pokemonSelectionView.setAmount(amount: 6)
         pokemonSelectionView.generateButtons()
         view.addSubview(pokemonSelectionView)
-        
     }
     
     override func viewDidLayoutSubviews()
@@ -75,9 +68,9 @@ class PokemonSelectionViewController: UIViewController
     
     @objc func confirmPressed()
     {
-        let pokemonBattleSceneViewController = PokemonBattleSceneViewController()
-        let pokemonBattleOptionsViewController = PokemonBattleOptionsViewController()
-        present(pokemonBattleSceneViewController, animated: true, completion:  nil)
+        let pokemonBattleViewController = PokemonBattleViewController()
+        //let pokemonBattleOptionsViewController = PokemonBattleOptionsViewController()
+        present(pokemonBattleViewController, animated: true, completion:  nil)
         //present(pokemonBattleOptionsViewController, animated: true, completion: nil)
     }
     
@@ -85,6 +78,7 @@ class PokemonSelectionViewController: UIViewController
     {
         pokemonSelectionView.generateButtons()
     }
+    
     /*
     // MARK: - Navigation
 

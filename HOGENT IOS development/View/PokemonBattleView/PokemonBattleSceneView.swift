@@ -110,5 +110,4 @@ class PokemonBattleSceneView: UIView
             try imageViewEnemy = pokemonSpriteHelper.setImage(from : pokemons[1].sprites!.front_default!)!
         }
         catch is Error { }
-    }
-}
+    }}

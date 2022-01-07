@@ -8,11 +8,11 @@
 
 import UIKit
 
-class LaunchViewController: UIViewController {
-
-    override func viewDidLoad() {
+class LaunchViewController: UIViewController
+{
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
@@ -30,15 +30,12 @@ class LaunchViewController: UIViewController {
     override func viewDidLayoutSubviews()
     {
         super.viewDidLayoutSubviews()
-        
         let screenSize: CGRect = UIScreen.main.bounds
-        
         let launchView = LaunchView(frame : CGRect (x : 0, y : 0,  width : screenSize.width , height : screenSize.height))
         
         launchView.buttonOk.addTarget(self, action: #selector(okPressed), for: .touchUpInside )
             
         view.addSubview(launchView)
-        
         print("PAIN")
     }
     
@@ -47,5 +44,4 @@ class LaunchViewController: UIViewController {
         let pokémonViewController = PokemonSelectionViewController()
         present(pokémonViewController, animated: true, completion:  nil)
     }
-
 }
