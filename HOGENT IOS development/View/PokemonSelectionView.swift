@@ -76,32 +76,23 @@ class PokemonSelectionView: UIView {
         self.amount = amount
     }
     
-    func generateButtons() -> Void
+    func generateButtons(URLs : [String]) -> Void
     {
         //var imageViews : [UIImageView] = []
         print("Generate Buttons Called!")
-        
         var isOneven : Bool = true
         var yMultiplier : Int = 1
         
-        var pokemons : [Pokemon]?
+        let pokemonSpriteHelper : PokemonSpriteHelper = PokemonSpriteHelper()
         
-        let pokemonGenerator : PokemonGenerator = PokemonGenerator()
-        
-        do {
-            pokemons = try pokemonGenerator.genneratePokémons(amount : self.amount)
-        } catch is Error {  }
-        
-        //buttons = [UIButton, UIButton, UIButton, UIButton, UIButton, UIButton]
-        for index in 1...self.amount
+        for URL in URLs
         {
-            let pokemonSpriteHelper : PokemonSpriteHelper = PokemonSpriteHelper()
             let imageView : UIImageView =
             {
                 var imageView = UIImageView()
                 do
                 {
-                    try imageView = pokemonSpriteHelper.setImage(from : pokemons![index-1].sprites!.front_default!)!
+                    try imageView = pokemonSpriteHelper.setImage(from : URL)!
                 }
                 catch is Error { }
                 imageView.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
@@ -139,6 +130,7 @@ class PokemonSelectionView: UIView {
             addSubview(imageView)
             imageViews.append(imageView)
         }
+        
     }
     
     func getImageViews() -> [UIImageView]

@@ -8,18 +8,43 @@
 
 import UIKit
 
+protocol PokemonSelectionViewControllerDelegate : class
+{
+    func highlighted(selection : [Pokemon])
+}
+
 class PokemonSelectionViewController: UIViewController
 {
+    weak var delegate : PokemonSelectionViewControllerDelegate?
+    
+    let pokemonGenerator : PokemonGenerator = PokemonGenerator()
+    
+    var pokemonOptions :  [Pokemon] = [Pokemon]()
+    
     var amountPicked = 0
+    
+    let colorPicked = UIColor(red : 0.219, green : 0.560, blue : 0.321, alpha : 1).cgColor
     
     let pokemonSelectionView : PokemonSelectionView  = PokemonSelectionView(frame : CGRect (x : 0, y : 0,  width : UIScreen.main.bounds.width , height : UIScreen.main.bounds.height))
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        do
+        {
+            pokemonOptions = try pokemonGenerator.genneratePokémons(amount: 6)
+        }
+        catch is Error { }
+        
         // Do any additional setup after loading the view.
         pokemonSelectionView.setAmount(amount: 6)
-        pokemonSelectionView.generateButtons()
+        var URLs : [String] = [String]()
+        for pokemonOption in pokemonOptions
+        {
+            URLs.append((pokemonOption.sprites?.front_default)!)
+        }
+        pokemonSelectionView.generateButtons(URLs: URLs)
         view.addSubview(pokemonSelectionView)
     }
     
@@ -43,14 +68,10 @@ class PokemonSelectionViewController: UIViewController
     //Skelet functie volgens https://stackoverflow.com/questions/27880607/how-to-assign-an-action-for-uiimageview-object-in-swift
     @objc func imageTapped(tapGestureRecognizer : UITapGestureRecognizer)
     {
-        print("heh")
-        let colorPicked = UIColor(red : 0.219, green : 0.560, blue : 0.321, alpha : 1).cgColor
-        
         let tappedImage = tapGestureRecognizer.view as! UIImageView
         
         if tappedImage.layer.borderColor == colorPicked
         {
-            print("Remove")
             tappedImage.layer.borderColor = UIColor(red : 0, green : 0, blue : 0, alpha : 1).cgColor
             amountPicked = amountPicked-1
             return
@@ -58,7 +79,6 @@ class PokemonSelectionViewController: UIViewController
         
         if tappedImage.layer.borderColor != colorPicked && amountPicked < 3
         {
-            print("Add")
             tappedImage.layer.borderColor = colorPicked
             amountPicked = amountPicked+1
             return
@@ -66,19 +86,38 @@ class PokemonSelectionViewController: UIViewController
         }
     }
     
+    func highlightedPokemon()
+    {
+        var selection : [Pokemon] = [Pokemon]()
+        for (index, imageView) in pokemonSelectionView.getImageViews().enumerated()
+        {
+            if imageView.layer.borderColor == colorPicked
+            {
+                selection.append(pokemonOptions[index])
+            }
+        }
+        print(selection)
+        
+        delegate?.highlighted(selection: selection)
+    }
+    
     @objc func confirmPressed()
     {
         let pokemonBattleViewController = PokemonBattleViewController()
-        //let pokemonBattleOptionsViewController = PokemonBattleOptionsViewController()
+        
+        delegate = pokemonBattleViewController.self
+        
         present(pokemonBattleViewController, animated: true, completion:  nil)
-        //present(pokemonBattleOptionsViewController, animated: true, completion: nil)
+        
+        highlightedPokemon()
+        
     }
     
     @objc func rerollPressed()
     {
-        pokemonSelectionView.generateButtons()
+        print("REROL PRESSED xD")
+        //pokemonSelectionView.generateButtons()
     }
-    
     /*
     // MARK: - Navigation
 

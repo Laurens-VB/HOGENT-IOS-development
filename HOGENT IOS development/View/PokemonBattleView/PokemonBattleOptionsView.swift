@@ -68,9 +68,8 @@ class PokemonBattleOptionsView: UIView
                 yMultiplier = yMultiplier + 1
             }
             
-            print(frame.size.height)
-            
             addSubview(buttonMove)
             buttonMoves.append(buttonMove)
         }
-    }}
+    }
+}

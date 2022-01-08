@@ -23,6 +23,9 @@
 		A6B04EDF2786E0FB00BD6628 /* PokemonBattleOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EDE2786E0FB00BD6628 /* PokemonBattleOptionsView.swift */; };
 		A6B04EE32786E47900BD6628 /* PokemonBattleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EE22786E47900BD6628 /* PokemonBattleView.swift */; };
 		A6B04EE52786E5D800BD6628 /* PokemonBattleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EE42786E5D800BD6628 /* PokemonBattleViewController.swift */; };
+		A6B04EE82788F9B400BD6628 /* TeamPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EE72788F9B400BD6628 /* TeamPicker.swift */; };
+		A6B04EEA2788FF9D00BD6628 /* BattleTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EE92788FF9D00BD6628 /* BattleTower.swift */; };
+		A6B04EEC27892E9200BD6628 /* Battle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EEB27892E9200BD6628 /* Battle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		A6B04EDE2786E0FB00BD6628 /* PokemonBattleOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonBattleOptionsView.swift; sourceTree = "<group>"; };
 		A6B04EE22786E47900BD6628 /* PokemonBattleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonBattleView.swift; sourceTree = "<group>"; };
 		A6B04EE42786E5D800BD6628 /* PokemonBattleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonBattleViewController.swift; sourceTree = "<group>"; };
+		A6B04EE72788F9B400BD6628 /* TeamPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamPicker.swift; sourceTree = "<group>"; };
+		A6B04EE92788FF9D00BD6628 /* BattleTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleTower.swift; sourceTree = "<group>"; };
+		A6B04EEB27892E9200BD6628 /* Battle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Battle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				A6B04EC92783BBA600BD6628 /* Structures.swift */,
+				A6B04EE72788F9B400BD6628 /* TeamPicker.swift */,
+				A6B04EE92788FF9D00BD6628 /* BattleTower.swift */,
+				A6B04EEB27892E9200BD6628 /* Battle.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -210,11 +219,14 @@
 				A6B04EC82783BA0E00BD6628 /* PokemonGenerator.swift in Sources */,
 				A6B04EE52786E5D800BD6628 /* PokemonBattleViewController.swift in Sources */,
 				A6B04ED927868D3700BD6628 /* PokemonSelectionView.swift in Sources */,
+				A6B04EE82788F9B400BD6628 /* TeamPicker.swift in Sources */,
 				A6B04ECA2783BBA600BD6628 /* Structures.swift in Sources */,
 				A6B04EC62783A7C400BD6628 /* PokemonBattleSceneView.swift in Sources */,
 				A6B04ED3278662A800BD6628 /* LaunchView.swift in Sources */,
 				A6B04EDB278692E400BD6628 /* PokemonSelectionViewController.swift in Sources */,
 				A6B04EB227839FC900BD6628 /* PokemonBattleSceneViewController.swift in Sources */,
+				A6B04EEC27892E9200BD6628 /* Battle.swift in Sources */,
+				A6B04EEA2788FF9D00BD6628 /* BattleTower.swift in Sources */,
 				A6B04EAE27839FC900BD6628 /* AppDelegate.swift in Sources */,
 				A6B04EDD2786A65300BD6628 /* PokemonSpriteHelper.swift in Sources */,
 				A6B04EE32786E47900BD6628 /* PokemonBattleView.swift in Sources */,

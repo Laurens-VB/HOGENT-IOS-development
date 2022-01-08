@@ -18,6 +18,9 @@ class PokemonBattleViewController: UIViewController
     }
     */
     
+    //let pokemonSelectionViewController : PokemonSelectionViewController = PokemonSelectionViewController()
+    
+    //let team
     let pokemonBattleView : PokemonBattleView = PokemonBattleView (
         frame: CGRect(
             x : 0
@@ -32,4 +35,15 @@ class PokemonBattleViewController: UIViewController
         super.viewDidLoad()
         view.addSubview(pokemonBattleView)
     }
+}
+
+//Extension op de PokemonBattleViewController die de PokemonSelectionViewControllerDelegate implementeerd
+extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
+{
+    func highlighted(selection: [Pokemon])
+    {
+        self.pokemonBattleView.pokemonBattleScene.setImagePokemonAly(URL: (selection[0].sprites?.back_default)!)
+    }
+    
+    
 }

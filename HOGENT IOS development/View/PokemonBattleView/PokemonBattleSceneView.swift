@@ -99,15 +99,25 @@ class PokemonBattleSceneView: UIView
         
     }
     
-    func setImagePokemons(pokemons : [Pokemon])
+    func setImagePokemonAly(URL : String)
     {
         let pokemonSpriteHelper :PokemonSpriteHelper = PokemonSpriteHelper()
         
         do
         {
-            try imageViewAly = pokemonSpriteHelper.setImage(from : pokemons[0].sprites!.back_default!)!
-            
-            try imageViewEnemy = pokemonSpriteHelper.setImage(from : pokemons[1].sprites!.front_default!)!
+            try imageViewAly = pokemonSpriteHelper.setImage(from : URL)!
         }
         catch is Error { }
-    }}
+    }
+    
+    func setImagePokemonEnemy(URL : String)
+    {
+        let pokemonSpriteHelper :PokemonSpriteHelper = PokemonSpriteHelper()
+        
+        do
+        {
+            try imageViewEnemy = pokemonSpriteHelper.setImage(from : URL)!
+        }
+        catch is Error { }
+    }
+}
