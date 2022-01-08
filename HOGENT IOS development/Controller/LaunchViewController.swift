@@ -43,5 +43,8 @@ class LaunchViewController: UIViewController
     {
         let pokémonViewController = PokemonSelectionViewController()
         present(pokémonViewController, animated: true, completion:  nil)
+        
+        /*let loadingViewController = LoadingViewController()
+        present(loadingViewController, animated: true, completion: nil)*/
     }
 }

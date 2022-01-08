@@ -8,7 +8,7 @@
 
 import Foundation
 
-class BattleTower
+class PokemonTrainer
 {
     var team : [Pokemon]
     
