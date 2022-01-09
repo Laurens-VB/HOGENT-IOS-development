@@ -73,6 +73,7 @@ class PokemonGenerator
     
     func genneratePokémons(amount : Int) throws ->  [Pokemon]
     {
+        pokemons = [Pokemon]()
         for _ in 1...amount
         {
             //Random getal genereren tussen 1 en 649

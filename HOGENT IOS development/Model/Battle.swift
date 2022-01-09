@@ -35,6 +35,9 @@ class Battle
         self.constEnemyTeam = enemyTeam!
         self.alyTeam = alyTeam
         self.enemyTeam = enemyTeam!
+        
+        print("zaiuozaiupjbzaiubnzabpiyuzauipâz")
+        print(self.alyTeam)
     }
     
     func getConstAlyTeam() -> [Pokemon]
@@ -125,7 +128,6 @@ class Battle
             {
                 print("enemy ded")
                 enemyTeam.removeFirst()
-                print(enemyTeam[0].name)
                 enemyFainted = true
             }
             
@@ -145,7 +147,6 @@ class Battle
                 {
                     print("Aly fainted")
                     alyTeam.removeFirst()
-                    print(alyTeam[0].name)
                     alyFainted = true
                 }
             }
@@ -168,7 +169,6 @@ class Battle
             {
                 print("ALY FAINTED!")
                 alyTeam.removeFirst()
-                print(alyTeam[0].name)
                 alyFainted = true
             }
             
@@ -190,17 +190,10 @@ class Battle
                 {
                     print("ENEMY FAINTED!")
                     enemyTeam.removeFirst()
-                    print(enemyTeam[0].name)
                     enemyFainted = true
                 }
             }
         }
-        
-        print("Aly Team: ")
-        print(alyTeam[0].stats![0].base_stat)
-        
-        print("Enemy Team: ")
-        print(enemyTeam[0].stats![0].base_stat)
     }
     
     func calculateDamage(damagingPokemon : Pokemon
@@ -222,11 +215,6 @@ class Battle
         
     }
     
-    /*func next(team : [Pokemon])
-    {
-        
-    }*/
-    
     func getHPStat(pokemon : Pokemon) -> Stats
     {
         return pokemon.stats![0]
@@ -236,6 +224,32 @@ class Battle
     {
         return pokemon.stats![5]
     }
+    
+    func isWinner() -> Bool?
+    {
+        if enemyTeam.count == 0 || alyTeam.count == 0
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    func didYouWin() -> Bool
+    {
+        if enemyTeam.count == 0
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    
     
     
 }

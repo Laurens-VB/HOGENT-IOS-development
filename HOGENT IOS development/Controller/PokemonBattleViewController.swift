@@ -2,14 +2,23 @@
 //  PokemonBattleViewController.swift
 //  HOGENT IOS development
 //
-//  Created by LaurensVB on 06/01/2022.
+//  Created by LaurensVB on 06/01/2022
 //  Copyright © 2022 LaurensVB. All rights reserved.
 //
 
 import UIKit
 
+
+protocol PokemonBattleViewControllerDelegate : class
+{
+    func passTeams(alyTeam : [Pokemon], enemyTeam: [Pokemon], imageView : [UIImageView] )
+}
 class PokemonBattleViewController: UIViewController
 {
+    weak var delegate : PokemonBattleViewControllerDelegate?
+    
+    var imageViews : [UIImageView] = [UIImageView]()
+    
     var battle : Battle? = nil
     
     var pokemonBattleView : PokemonBattleView? = nil
@@ -19,7 +28,6 @@ class PokemonBattleViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        print("KOELEKEKOEEE")
     }
     
     func getMoveDetail(idMove : Int) -> MoveDetail
@@ -38,14 +46,16 @@ class PokemonBattleViewController: UIViewController
 //Extension op de PokemonBattleViewController die de PokemonSelectionViewControllerDelegate implementeerd
 extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
 {
-    func highlighted(selection: [Pokemon]) -> Void
+    func highlighted(selection: [Pokemon], imageViews : [UIImageView]) -> Void
     {
-        createBattle(alyTeam : selection)
+        createBattle(alyTeam: selection)
         battle?.shuffleTeams()
         generateMoveButtons()
         generateSprites()
         
         view.addSubview(pokemonBattleView!)
+        
+        self.imageViews = imageViews
     }
     
     func createBattle(alyTeam : [Pokemon]) -> Void
@@ -56,6 +66,11 @@ extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
     func generateMoveButtons() -> Void
     {
         var selection = battle?.getAlyTeam()
+        
+        print("REEEEE")
+        print(selection?.count)
+        print("REEEEE")
+        
         
         var moves : [String] = [String]()
         for move in selection![0].moves!
@@ -170,22 +185,48 @@ extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
     
     func turnUI() -> Void
     {
-        updateHP()
-        print("TURNUI")
-        
-        if ( (battle?.getAlyFainted())! || (battle?.getEnemyFainted())! )
+        if battle?.isWinner() == false
         {
-            generateSprites()
-            remakeButtons()
-        }
-        
-        if (battle?.getAlyFainted())!
-        {
-            renewStatusBar(isAly: true)
+            updateHP()
+            
+            if ( (battle?.getAlyFainted())! || (battle?.getEnemyFainted())! )
+            {
+                generateSprites()
+                remakeButtons()
+            }
+            
+            if (battle?.getAlyFainted())!
+            {
+                renewStatusBar(isAly: true)
+            }
+            else
+            {
+                renewStatusBar(isAly: false)
+            }
         }
         else
         {
-            renewStatusBar(isAly: false)
+            if (battle?.didYouWin())!
+            {
+                let launchViewcontroller = LaunchViewController()
+                
+                delegate = launchViewcontroller.self
+                
+                delegate?.passTeams(
+                    alyTeam: (battle?.getConstAlyTeam())!
+                    , enemyTeam: (battle?.getConstEnemyTeam())!
+                    , imageView: self.imageViews
+                )
+                
+                print("U hebt gewonnen!")
+                
+            }
+            else
+            {
+                print("U hebt verloren!")
+            }
+            
+            self.dismiss(animated: true, completion: nil)
         }
     }
     

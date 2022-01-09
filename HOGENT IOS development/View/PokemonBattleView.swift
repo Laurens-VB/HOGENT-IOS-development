@@ -31,7 +31,8 @@ class PokemonBattleView: UIView {
             , naamEnemy : naamEnemy)
         
         pokemonBattleOptions = {
-            let pokemonBattleOptions : PokemonBattleOptionsView = PokemonBattleOptionsView(frame : frame, moveNames: moveNames)
+            let pokemonBattleOptions : PokemonBattleOptionsView = PokemonBattleOptionsView(frame : frame
+                , moveNames: moveNames)
             return pokemonBattleOptions
         }()
         super.init(frame : frame)

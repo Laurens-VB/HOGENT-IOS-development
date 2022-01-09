@@ -9,12 +9,14 @@ import UIKit
 
 protocol PokemonSelectionViewControllerDelegate : class
 {
-    func highlighted(selection : [Pokemon])
+    func highlighted(selection : [Pokemon], imageViews : [UIImageView] )
 }
 
 class LaunchViewController : UIViewController
 {
     weak var delegate : PokemonSelectionViewControllerDelegate?
+    
+    var flag : Bool = false
     
     let pokemonGenerator : PokemonGenerator = PokemonGenerator()
     
@@ -24,7 +26,7 @@ class LaunchViewController : UIViewController
     
     let colorPicked = UIColor(red : 84/255, green : 135/255, blue : 81/255, alpha : 1).cgColor
     
-    let pokemonSelectionView : PokemonSelectionView  = PokemonSelectionView(frame : CGRect (x : 0, y : 0,  width : UIScreen.main.bounds.width , height : UIScreen.main.bounds.height))
+    var pokemonSelectionView : PokemonSelectionView? = nil
     
     override func viewDidLoad()
     {
@@ -37,19 +39,37 @@ class LaunchViewController : UIViewController
         catch is Error { }
         
         // Do any additional setup after loading the view.
-        pokemonSelectionView.setAmount(amount: 6)
         var URLs : [String] = [String]()
         for pokemonOption in pokemonOptions
         {
             URLs.append((pokemonOption.sprites?.front_default)!)
         }
-        pokemonSelectionView.generateButtons(URLs: URLs)
-        view.addSubview(pokemonSelectionView)
+             pokemonSelectionView = PokemonSelectionView(frame : CGRect (x : 0, y : 0,  width : UIScreen.main.bounds.width , height : UIScreen.main.bounds.height)
+                , URLs : URLs)
+        
+        view.addSubview(pokemonSelectionView!)
+    }
+    
+    func generatePokemonImages()
+    {
+        do
+        {
+            pokemonOptions = try pokemonGenerator.genneratePokémons(amount: 6)
+        }
+        catch is Error { }
+        
+        // Do any additional setup after loading the view.
+        pokemonSelectionView!.setAmount(amount: 6)
+        var URLs : [String] = [String]()
+        for pokemonOption in pokemonOptions
+        {
+            URLs.append((pokemonOption.sprites?.front_default)!)
+        }
     }
     
     override func viewDidLayoutSubviews()
     {
-        for imageView in pokemonSelectionView.getImageViews()
+        for imageView in pokemonSelectionView!.getImageViews()
         {
             //Volgens https://stackoverflow.com/questions/27880607/how-to-assign-an-action-for-uiimageview-object-in-swift
             let tapGestureRecognizer = UITapGestureRecognizer(target : self, action : #selector(imageTapped(tapGestureRecognizer:)))
@@ -58,9 +78,9 @@ class LaunchViewController : UIViewController
             imageView.addGestureRecognizer(tapGestureRecognizer)
         }
         
-        pokemonSelectionView.buttonConfirm.addTarget(self, action: #selector(confirmPressed), for: .touchUpInside )
+        pokemonSelectionView!.buttonConfirm.addTarget(self, action: #selector(confirmPressed), for: .touchUpInside )
         
-        pokemonSelectionView.buttonReroll.addTarget(self, action: #selector(rerollPressed), for: .touchUpInside )
+        pokemonSelectionView!.buttonReroll.addTarget(self, action: #selector(rerollPressed), for: .touchUpInside )
     }
     
     //Skelet functie volgens https://stackoverflow.com/questions/27880607/how-to-assign-an-action-for-uiimageview-object-in-swift
@@ -72,6 +92,9 @@ class LaunchViewController : UIViewController
         {
             tappedImage.layer.backgroundColor = UIColor(red : 164/255, green : 176/255, blue : 171/255, alpha : 1).cgColor
             amountPicked = amountPicked-1
+            
+            pokemonSelectionView!.lockConfirmButton()
+            
             return
         }
         
@@ -79,24 +102,37 @@ class LaunchViewController : UIViewController
         {
             tappedImage.backgroundColor = UIColor(cgColor : colorPicked)
             amountPicked = amountPicked+1
-            return
             
+            if amountPicked == 3
+            {
+                print("unlocking confirm button!")
+                pokemonSelectionView!.unlockConfirmButton()
+            }
+            return
         }
     }
     
     func highlightedPokemon()
     {
         var selection : [Pokemon] = [Pokemon]()
-        for (index, imageView) in pokemonSelectionView.getImageViews().enumerated()
+        print(pokemonSelectionView!.getImageViews().count)
+        print(pokemonOptions.count)
+        
+        for (index, imageView) in pokemonSelectionView!.getImageViews().enumerated()
         {
-            if imageView.layer.borderColor == colorPicked
+            if imageView.backgroundColor == UIColor(cgColor : colorPicked)
             {
                 selection.append(pokemonOptions[index])
             }
         }
         print(selection)
         
-        delegate?.highlighted(selection: selection)
+        delegate?.highlighted(selection: selection, imageViews: pokemonSelectionView!.getImageViews())
+    }
+    
+    func clearPokemon()
+    {
+        print("clearing pokémon")
     }
     
     @objc func confirmPressed()
@@ -113,16 +149,82 @@ class LaunchViewController : UIViewController
     
     @objc func rerollPressed()
     {
-        print("REROL PRESSED xD")
-        //pokemonSelectionView.generateButtons()
+        pokemonSelectionView?.imageViews = [UIImageView]()
+        amountPicked = 0
+        var pokemons : [Pokemon]? = nil
+        do
+        {
+            pokemons = try pokemonGenerator.genneratePokémons(amount : 6)
+        }
+        catch is Error {}
+        
+        self.pokemonOptions = pokemons!
+        
+        var URLs : [String] = [String]()
+        for pokemon in pokemons!
+        {
+            URLs.append((pokemon.sprites?.front_default)!)
+        }
+        
+        pokemonSelectionView?.reroll(URLs: URLs)
+        
+        viewDidLayoutSubviews()
+        
+        print("rerol be done")
     }
-    /*
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+}
 
+extension LaunchViewController : PokemonBattleViewControllerDelegate
+{
+    func passTeams(alyTeam : [Pokemon], enemyTeam : [Pokemon], imageView : [UIImageView] )
+    {
+        var imgViews = imageView
+        
+        let combined : [Pokemon] = alyTeam + enemyTeam
+        print("LaunchView Delegate!")
+        print(imgViews.count)
+
+        self.pokemonOptions = combined
+        
+        var URLs : [String] = [String]()
+        for pokemon in combined
+        {
+            URLs.append((pokemon.sprites?.front_default)!)
+        }
+        
+        
+        let pokemonSpriteHelper : PokemonSpriteHelper = PokemonSpriteHelper()
+
+        for URL in URLs
+        {
+            print(URL)
+            let pokemonImageView : UIImageView =
+            {
+                var pokemonImageview = UIImageView()
+                do
+                {
+                    try pokemonImageview = pokemonSpriteHelper.setImage(from : URL)!
+                }
+                catch is Error { }
+                return pokemonImageview
+            }()
+            imgViews.append(pokemonImageView)
+        }
+        
+        print("pppppppppppppppp")
+        print(imgViews.count)
+        imgViews.removeFirst()
+        imgViews.removeFirst()
+        imgViews.removeFirst()
+        imgViews.removeFirst()
+        imgViews.removeFirst()
+        imgViews.removeFirst()
+        print(imgViews.count)
+        print("^^^^^^^^^^^^^^^^^^")
+        
+        pokemonSelectionView?.imageViews = imgViews
+        pokemonSelectionView?.layoutSubviews()
+        
+        print("pass teams done!")
+    }
 }

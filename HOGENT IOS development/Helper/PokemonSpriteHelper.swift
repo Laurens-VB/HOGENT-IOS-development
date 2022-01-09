@@ -9,15 +9,6 @@
 import UIKit
 import Foundation
 
-/*
- ----------------------------------------------------------
- 
- KAN MSS ALS EXTENSION GEIMPLEMENTEERD WORDEN ??? HMMMMMM
- 
- ----------------------------------------------------------
- */
-
-
 class PokemonSpriteHelper
 {
         
