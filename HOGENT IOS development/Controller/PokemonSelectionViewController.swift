@@ -5,7 +5,6 @@
 //  Created by LaurensVB on 06/01/2022.
 //  Copyright © 2022 LaurensVB. All rights reserved.
 //
-
 import UIKit
 
 protocol PokemonSelectionViewControllerDelegate : class
@@ -120,7 +119,6 @@ class PokemonSelectionViewController: UIViewController
     }
     /*
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.

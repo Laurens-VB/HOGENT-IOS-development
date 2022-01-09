@@ -10,6 +10,8 @@ import Foundation
 
 class PokemonGenerator
 {
+    var pokemons : [Pokemon] = [Pokemon]()
+    
     init() {}
     
     private func requestPokémon(entry : Int) throws -> Pokemon
@@ -32,9 +34,17 @@ class PokemonGenerator
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField : "Content-Type")
         
-        var pokemon : Pokemon = Pokemon(name : ""
+        var pokemon : Pokemon = Pokemon(
+            name : ""
             , sprites : Pokemon.Sprites(back_default: "", front_default: "")
+            //, stats : Pokemon.Stats(base_stat: 1)
+            //, moves : [Pokemon.Moves(move: Pokemon.Moves.Move(name : ""))]
+            , moves: [Moves]()
         )
+        
+        print(pokemon)
+        
+        print("xD")
         
         //Aanmaken & instellen van de task, taak die we met het request wensen uit te voeren:
         let task = URLSession.shared.dataTask(with: request)
@@ -48,7 +58,9 @@ class PokemonGenerator
             do
             {
                 //Uitroepteken dient om de ontvangen data te unwrappen!
+                print("pain")
                 pokemon = try JSONDecoder().decode(Pokemon.self , from: data)
+                //print(pokemon)
                 
             }
             catch
@@ -66,8 +78,6 @@ class PokemonGenerator
     
     func genneratePokémons(amount : Int) throws ->  [Pokemon]
     {
-        var pokemons : [Pokemon] = [Pokemon]()
-        
         for _ in 1...amount
         {
             //Random getal genereren tussen 1 en 898, 1 included, 898 included
@@ -82,15 +92,47 @@ class PokemonGenerator
                     entry = Int.random(in: 1...898)
                     pokemon = try requestPokémon( entry :  entry )
                 }
-                    while( pokemon.sprites?.front_default == nil || pokemon.sprites?.back_default == nil )
+                while( pokemon.sprites?.front_default == nil || pokemon.sprites?.back_default == nil )
 
+                //print(pokemon)
+                
                 pokemons.append(pokemon)
                 
             } catch is Error { }
         }
-
         print(pokemons.count)
         
+        pickRandomMoves(amount: 4)
         return pokemons
+    }
+    
+    func pickRandomMoves(amount : Int)
+    {
+        for (index, pokemon) in pokemons.enumerated()
+        {
+            print(pokemon.moves?.count)
+            var moves : [Moves] = [Moves]()
+            /*for _ in 1...4
+            {
+                if(pokemon.moves!.count < 4)
+                {
+                    do
+                    {
+                        pokemons[index] = try genneratePokémons(amount : 1)[0]
+                    }
+                    catch is Error {}
+                }*/
+            
+            for i in 1...amount
+            {
+                if pokemon.moves!.count > 0
+                {
+                    var moveNumber = Int.random(in: 0...pokemon.moves!.count-1)
+                    moves.append(pokemon.moves![moveNumber])
+                    
+                }
+            }
+            pokemons[index].moves = moves
+        }
     }
 }

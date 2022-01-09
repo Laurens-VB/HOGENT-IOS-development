@@ -10,12 +10,32 @@ import UIKit
 
 class PokemonBattleOptionsView: UIView
 {
+    var moveNames : [String] = []
+    
     var buttonMoves : [UIButton] = []
     
-    override init(frame : CGRect)
+    init(frame : CGRect, moveNames : [String])
     {
         super.init(frame : frame)
-        backgroundColor = .purple
+        backgroundColor = .red
+        self.moveNames = moveNames
+        
+        for moveName in moveNames
+        {
+            print(moveName)
+            let buttonMove : UIButton =
+            {
+                let buttonMove = UIButton()
+                buttonMove.backgroundColor = .systemGreen
+                buttonMove.setTitle(moveName, for : .normal)
+                return buttonMove
+                
+            }()
+            buttonMoves.append(buttonMove)
+        }
+        
+        print(buttonMoves.count)
+        print("CONST BATTLE OPTIONS DONE")
     }
     
     required init?(coder: NSCoder) {
@@ -24,27 +44,24 @@ class PokemonBattleOptionsView: UIView
     
     override func layoutSubviews()
     {
+        print("KANKERZOOOOI")
+        
         generateMoveButtons()
+        
+        for buttonMove in buttonMoves
+        {
+            addSubview(buttonMove)
+        }
     }
     
     func generateMoveButtons() -> Void
     {
-        
-        print(frame.size.width)
+        print("WTF IST NUJ WERE VINT")
         var isOneven : Bool = true
         var yMultiplier : Int = 1
         //buttons = [UIButton, UIButton, UIButton, UIButton, UIButton, UIButton]
-        for index in 1...4
+        for buttonMove in buttonMoves
         {
-            let buttonMove : UIButton =
-            {
-                let buttonMove = UIButton()
-                buttonMove.backgroundColor = .systemGreen
-                buttonMove.setTitle("MOVE", for : .normal)
-                return buttonMove
-                
-            }()
-            
             if isOneven
             {
                 buttonMove.frame = CGRect(
@@ -67,9 +84,11 @@ class PokemonBattleOptionsView: UIView
                 //Iedere keer als we van oneven false naar true gaan, moet de y multiplier met 1 vermeerderen!
                 yMultiplier = yMultiplier + 1
             }
-            
-            addSubview(buttonMove)
-            buttonMoves.append(buttonMove)
         }
+    }
+    
+    func getButtonMoves() -> [UIButton]
+    {
+        return buttonMoves
     }
 }

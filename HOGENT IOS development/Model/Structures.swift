@@ -11,10 +11,10 @@ import Foundation
 //Models
 struct Pokemon : Codable
 {
-    var name : String
-    var sprites : Sprites?
+    let name : String
+    let sprites : Sprites?
     //let stats : Stats
-    //let moves: [Moves]
+    var moves: [Moves]?
     
     struct Sprites : Codable
     {
@@ -23,15 +23,16 @@ struct Pokemon : Codable
     
     struct Stats : Codable
     {
-        let base_stat : String
+        let base_stat : Int?
     }
+}
+
+struct Moves: Codable
+{
+    let move : Move?
     
-    struct Moves: Codable
+    struct Move: Codable
     {
-        let move : Move
-        struct Move: Codable
-        {
-            let name : String
-        }
+        let name : String?
     }
 }

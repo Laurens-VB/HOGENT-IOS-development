@@ -1,11 +1,10 @@
-//
+///
 //  PokemonSelectionView.swift
 //  HOGENT IOS development
 //
 //  Created by LaurensVB on 06/01/2022.
 //  Copyright © 2022 LaurensVB. All rights reserved.
 //
-
 import UIKit
 
 class PokemonSelectionView: UIView {

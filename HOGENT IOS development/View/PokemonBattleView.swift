@@ -18,22 +18,23 @@ class PokemonBattleView: UIView {
     }
     */
     
+    var pokemonBattleOptions : PokemonBattleOptionsView
+    
     let pokemonBattleScene : PokemonBattleSceneView =
     {
+        print("TTTEST")
         let pokemonBattleScene : PokemonBattleSceneView = PokemonBattleSceneView()
         return pokemonBattleScene
         
     }()
     
-    var pokemonBattleOptions : PokemonBattleOptionsView =
+    init(frame : CGRect, moveNames : [String])
     {
-           let pokemonBattleOptions : PokemonBattleOptionsView = PokemonBattleOptionsView()
-           return pokemonBattleOptions
-           
-    }()
-    
-    override init(frame : CGRect)
-    {
+        print(moveNames)
+        pokemonBattleOptions = {
+            let pokemonBattleOptions : PokemonBattleOptionsView = PokemonBattleOptionsView(frame : frame, moveNames: moveNames)
+            return pokemonBattleOptions
+        }()
         super.init(frame : frame)
     }
     
@@ -44,6 +45,7 @@ class PokemonBattleView: UIView {
     
     override func layoutSubviews()
     {
+        print("CREATING BATTLE SCENE")
         pokemonBattleScene.frame = CGRect (
             x : 0
             , y : 0
@@ -51,12 +53,14 @@ class PokemonBattleView: UIView {
             , height : (frame.size.height/2)
         )
         
+        print("CREATING BATTLE OPTIONS")
         pokemonBattleOptions.frame = CGRect (
             x : 0
             , y : (frame.size.height/2)
             , width : (frame.size.width)
             , height : (frame.size.height/2)
         )
+        
         addSubview(pokemonBattleScene)
         addSubview(pokemonBattleOptions)
     }

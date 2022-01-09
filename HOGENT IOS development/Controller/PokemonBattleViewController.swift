@@ -10,30 +10,15 @@ import UIKit
 
 class PokemonBattleViewController: UIViewController
 {
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-    
-    //let pokemonSelectionViewController : PokemonSelectionViewController = PokemonSelectionViewController()
-    
-    //let team
-    let pokemonBattleView : PokemonBattleView = PokemonBattleView (
-        frame: CGRect(
-            x : 0
-            , y : 0
-            , width : UIScreen.main.bounds.width
-            , height : UIScreen.main.bounds.height
-        )
-    )
+    var pokemonBattleView : PokemonBattleView? = nil
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        view.addSubview(pokemonBattleView)
+        
+        
+        
+        print("KOELEKEKOEEE")
     }
 }
 
@@ -42,8 +27,51 @@ extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
 {
     func highlighted(selection: [Pokemon])
     {
-        self.pokemonBattleView.pokemonBattleScene.setImagePokemonAly(URL: (selection[0].sprites?.back_default)!)
+        var moves : [String] = [String]()
+        for move in selection[0].moves!
+        {
+            moves.append((move.move?.name)!)
+        }
+        
+        pokemonBattleView = PokemonBattleView (
+               frame: CGRect(
+                   x : 0
+                   , y : 0
+                   , width : UIScreen.main.bounds.width
+                   , height : UIScreen.main.bounds.height
+               )
+               ,moveNames : moves
+           )
+        
+        print("EINDELIJK VIVA ESPAGNA!!!")
+        var index = 0
+        for button in pokemonBattleView?.pokemonBattleOptions.getButtonMoves() ?? []
+        {
+            let tapGesture = MoveTappedRecognizer(target: self, action : #selector(buttonMovePressed(sender:)))
+            
+            tapGesture.index = index
+            
+            button.addGestureRecognizer(tapGesture)
+            
+            index = index+1
+        }
+        
+        pokemonBattleView!.pokemonBattleScene.setImagePokemonAly(URL: (selection[0].sprites?.back_default)!)
+        
+        
+        view.addSubview(pokemonBattleView!)
+        
+        
+    }
+    
+    @objc func buttonMovePressed(sender: MoveTappedRecognizer)
+    {
+        print(sender.index!)
     }
     
     
-}
+    
+    
+    class MoveTappedRecognizer : UITapGestureRecognizer {
+        var index: Int?
+    }}
