@@ -36,7 +36,6 @@ class LaunchViewController: UIViewController
         launchView.buttonOk.addTarget(self, action: #selector(okPressed), for: .touchUpInside )
             
         view.addSubview(launchView)
-        print("PAIN")
     }
     
     @objc func okPressed()

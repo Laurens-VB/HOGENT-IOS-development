@@ -49,7 +49,6 @@ class PokemonSelectionViewController: UIViewController
     
     override func viewDidLayoutSubviews()
     {
-        print("ViewDidLayout runned")
         for imageView in pokemonSelectionView.getImageViews()
         {
             //Volgens https://stackoverflow.com/questions/27880607/how-to-assign-an-action-for-uiimageview-object-in-swift

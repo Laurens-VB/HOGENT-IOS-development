@@ -77,8 +77,7 @@ class PokemonSelectionView: UIView {
     
     func generateButtons(URLs : [String]) -> Void
     {
-        //var imageViews : [UIImageView] = []
-        print("Generate Buttons Called!")
+        //var imageViews : [UIImageView] = [])
         var isOneven : Bool = true
         var yMultiplier : Int = 1
         

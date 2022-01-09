@@ -33,9 +33,6 @@ class PokemonBattleOptionsView: UIView
             }()
             buttonMoves.append(buttonMove)
         }
-        
-        print(buttonMoves.count)
-        print("CONST BATTLE OPTIONS DONE")
     }
     
     required init?(coder: NSCoder) {
@@ -44,10 +41,7 @@ class PokemonBattleOptionsView: UIView
     
     override func layoutSubviews()
     {
-        print("KANKERZOOOOI")
-        
         generateMoveButtons()
-        
         for buttonMove in buttonMoves
         {
             addSubview(buttonMove)
@@ -56,7 +50,6 @@ class PokemonBattleOptionsView: UIView
     
     func generateMoveButtons() -> Void
     {
-        print("WTF IST NUJ WERE VINT")
         var isOneven : Bool = true
         var yMultiplier : Int = 1
         //buttons = [UIButton, UIButton, UIButton, UIButton, UIButton, UIButton]

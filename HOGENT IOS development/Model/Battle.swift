@@ -54,8 +54,10 @@ class Battle
     
     func shuffleTeams() -> Void
     {
-        alyTeam.shuffle()
-        enemyTeam.shuffle()
+        print(alyTeam)
+        self.alyTeam = alyTeam.shuffled()
+        print(alyTeam)
+        self.enemyTeam = enemyTeam.shuffled()
     }
     
     

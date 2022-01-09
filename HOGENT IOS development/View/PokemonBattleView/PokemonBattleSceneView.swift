@@ -48,8 +48,6 @@ class PokemonBattleSceneView: UIView
     {
         super.init(frame : frame)
         backgroundColor = .cyan
-        print("CONST BATTLE SCENE DONE")
-        print(frame)
     }
     
     required init?(coder: NSCoder) {
@@ -58,8 +56,6 @@ class PokemonBattleSceneView: UIView
     
     override func layoutSubviews()
     {
-        print(frame)
-        
         imageViewBattleBackDrop.frame = CGRect(
             x : 0
             , y : 0

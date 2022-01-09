@@ -22,7 +22,6 @@ class PokemonBattleView: UIView {
     
     let pokemonBattleScene : PokemonBattleSceneView =
     {
-        print("TTTEST")
         let pokemonBattleScene : PokemonBattleSceneView = PokemonBattleSceneView()
         return pokemonBattleScene
         
@@ -45,7 +44,6 @@ class PokemonBattleView: UIView {
     
     override func layoutSubviews()
     {
-        print("CREATING BATTLE SCENE")
         pokemonBattleScene.frame = CGRect (
             x : 0
             , y : 0
@@ -53,7 +51,6 @@ class PokemonBattleView: UIView {
             , height : (frame.size.height/2)
         )
         
-        print("CREATING BATTLE OPTIONS")
         pokemonBattleOptions.frame = CGRect (
             x : 0
             , y : (frame.size.height/2)

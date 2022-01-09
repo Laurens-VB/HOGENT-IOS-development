@@ -25,7 +25,6 @@ class PokemonBattleSceneViewController: UIViewController
         do
         {
             pokemons = try pokemonGenerator.genneratePokémons(amount: 2)
-            print(pokemons)
         }
         catch
         {

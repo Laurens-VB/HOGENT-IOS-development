@@ -59,10 +59,7 @@ class PokemonMoveDetails
             do
             {
                 //Uitroepteken dient om de ontvangen data te unwrappen!
-                print("pain")
                 move = try JSONDecoder().decode(MoveDetail.self , from: data)
-                print(move)
-                
             }
             catch
             {
