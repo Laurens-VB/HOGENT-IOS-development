@@ -16,7 +16,7 @@ class LaunchViewController : UIViewController
 {
     weak var delegate : PokemonSelectionViewControllerDelegate?
     
-    var flag : Bool = false
+    var streak = 0
     
     let pokemonGenerator : PokemonGenerator = PokemonGenerator()
     
@@ -30,6 +30,7 @@ class LaunchViewController : UIViewController
     
     override func viewDidLoad()
     {
+        print("VDL")
         super.viewDidLoad()
         
         do
@@ -110,6 +111,8 @@ class LaunchViewController : UIViewController
             }
             return
         }
+        
+        
     }
     
     func highlightedPokemon()
@@ -172,59 +175,30 @@ class LaunchViewController : UIViewController
         
         print("rerol be done")
     }
+    
+    func updateStreak()
+    {
+        print(streak)
+        pokemonSelectionView?.updateStreak(streak: streak)
+        
+    }
 }
 
 extension LaunchViewController : PokemonBattleViewControllerDelegate
 {
-    func passTeams(alyTeam : [Pokemon], enemyTeam : [Pokemon], imageView : [UIImageView] )
+    func isGewonnen(isGewonnen: Bool)
     {
-        var imgViews = imageView
+        print("delegate gang")
         
-        let combined : [Pokemon] = alyTeam + enemyTeam
-        print("LaunchView Delegate!")
-        print(imgViews.count)
-
-        self.pokemonOptions = combined
-        
-        var URLs : [String] = [String]()
-        for pokemon in combined
+        if isGewonnen
         {
-            URLs.append((pokemon.sprites?.front_default)!)
+            self.streak = streak + 1
         }
-        
-        
-        let pokemonSpriteHelper : PokemonSpriteHelper = PokemonSpriteHelper()
-
-        for URL in URLs
+        else
         {
-            print(URL)
-            let pokemonImageView : UIImageView =
-            {
-                var pokemonImageview = UIImageView()
-                do
-                {
-                    try pokemonImageview = pokemonSpriteHelper.setImage(from : URL)!
-                }
-                catch is Error { }
-                return pokemonImageview
-            }()
-            imgViews.append(pokemonImageView)
+            self.streak = 0
         }
-        
-        print("pppppppppppppppp")
-        print(imgViews.count)
-        imgViews.removeFirst()
-        imgViews.removeFirst()
-        imgViews.removeFirst()
-        imgViews.removeFirst()
-        imgViews.removeFirst()
-        imgViews.removeFirst()
-        print(imgViews.count)
-        print("^^^^^^^^^^^^^^^^^^")
-        
-        pokemonSelectionView?.imageViews = imgViews
-        pokemonSelectionView?.layoutSubviews()
-        
-        print("pass teams done!")
     }
+    
+    
 }

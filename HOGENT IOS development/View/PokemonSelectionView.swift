@@ -11,6 +11,8 @@ import UIKit
 class PokemonSelectionView: UIView
 {
     
+    var streak : Int = 0
+    
     var amount : Int = 3
     var imageViews : [UIImageView] = [UIImageView]()
     
@@ -31,10 +33,21 @@ class PokemonSelectionView: UIView
         return buttonReroll
     }()
     
+    var labelStreak : UILabel? = nil
+    
     init(frame : CGRect, URLs : [String] )
     {
         super.init(frame : frame)
         backgroundColor = UIColor(red : 53/255, green : 56/255, blue : 54/255, alpha : 1)
+        
+        
+        self.labelStreak =
+        {
+            let labelStreak = UILabel()
+            labelStreak.textColor = UIColor.white
+            labelStreak.text = "" + String(self.streak)
+            return labelStreak
+        }()
         
         let pokemonSpriteHelper : PokemonSpriteHelper = PokemonSpriteHelper()
         for URL in URLs
@@ -107,6 +120,19 @@ class PokemonSelectionView: UIView
         {
             addSubview(imageView)
         }
+        
+        labelStreak!.frame = CGRect(
+            x : (Int(frame.size.width)/2) - (200/2)
+            , y : 400
+            , width: 200
+            , height: 50
+        )
+        
+        labelStreak?.text = "Current Streak: \(streak)"
+        labelStreak?.textAlignment = NSTextAlignment.center;
+        labelStreak?.backgroundColor = .red
+        labelStreak?.backgroundColor = UIColor(red : 53/255, green : 56/255, blue : 54/255, alpha : 1)
+        addSubview(labelStreak!)
         
         buttonConfirm.frame = CGRect(
             x: (Int(frame.size.width)/2) - (200/2)
@@ -187,4 +213,13 @@ class PokemonSelectionView: UIView
         print(imageViews.count)
         layoutSubviews()
     }
+    
+    func updateStreak(streak : Int)
+    {
+        print("NEW STREAK IS")
+        self.streak = streak
+        
+        labelStreak?.text = "Current Streak: \(streak)"
+    }
+    
 }

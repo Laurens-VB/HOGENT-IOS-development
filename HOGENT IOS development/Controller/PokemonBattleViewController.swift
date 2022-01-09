@@ -11,14 +11,12 @@ import UIKit
 
 protocol PokemonBattleViewControllerDelegate : class
 {
-    func passTeams(alyTeam : [Pokemon], enemyTeam: [Pokemon], imageView : [UIImageView] )
+    func isGewonnen(isGewonnen : Bool )
 }
 class PokemonBattleViewController: UIViewController
 {
     weak var delegate : PokemonBattleViewControllerDelegate?
-    
-    var imageViews : [UIImageView] = [UIImageView]()
-    
+
     var battle : Battle? = nil
     
     var pokemonBattleView : PokemonBattleView? = nil
@@ -54,8 +52,6 @@ extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
         generateSprites()
         
         view.addSubview(pokemonBattleView!)
-        
-        self.imageViews = imageViews
     }
     
     func createBattle(alyTeam : [Pokemon]) -> Void
@@ -67,9 +63,7 @@ extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
     {
         var selection = battle?.getAlyTeam()
         
-        print("REEEEE")
         print(selection?.count)
-        print("REEEEE")
         
         
         var moves : [String] = [String]()
@@ -160,7 +154,7 @@ extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
         pokemonBattleView?.pokemonBattleScene.alyStatusView.updateHPBar(currentHP: (battle?.getAlyTeam()[0].stats?[0].base_stat)!
             , baseHP: (battle?.getConstAlyTeam()[0].stats?[0].base_stat)!)
         
-        pokemonBattleView?.pokemonBattleScene.alyStatusView.updateHPBar(currentHP: (battle?.getEnemyTeam()[0].stats?[0].base_stat)!
+        pokemonBattleView?.pokemonBattleScene.enemyStatusView.updateHPBar(currentHP: (battle?.getEnemyTeam()[0].stats?[0].base_stat)!
         , baseHP: (battle?.getConstEnemyTeam()[0].stats?[0].base_stat)!)
     }
     
@@ -203,30 +197,21 @@ extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
             {
                 renewStatusBar(isAly: false)
             }
+                
+            
+            
         }
         else
         {
-            if (battle?.didYouWin())!
-            {
-                let launchViewcontroller = LaunchViewController()
-                
-                delegate = launchViewcontroller.self
-                
-                delegate?.passTeams(
-                    alyTeam: (battle?.getConstAlyTeam())!
-                    , enemyTeam: (battle?.getConstEnemyTeam())!
-                    , imageView: self.imageViews
-                )
-                
-                print("U hebt gewonnen!")
-                
-            }
-            else
-            {
-                print("U hebt verloren!")
-            }
+
+            
+            let launchViewController = LaunchViewController()
+            
+            delegate = launchViewController.self
             
             self.dismiss(animated: true, completion: nil)
+            
+            delegate!.isGewonnen(isGewonnen: (battle?.didYouWin())!)
         }
     }
     

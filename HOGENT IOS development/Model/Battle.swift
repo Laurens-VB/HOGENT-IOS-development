@@ -5,7 +5,6 @@
 //  Created by LaurensVB on 08/01/2022.
 //  Copyright © 2022 LaurensVB. All rights reserved.
 //
-
 import Foundation
 
 class Battle
@@ -29,15 +28,12 @@ class Battle
         {
              enemyTeam = try pokemonGeneratorHelper.genneratePokémons(amount: 3)
         }
-        catch is Error { }
+        catch is Error { }
         
         self.constAlyTeam = alyTeam
         self.constEnemyTeam = enemyTeam!
         self.alyTeam = alyTeam
         self.enemyTeam = enemyTeam!
-        
-        print("zaiuozaiupjbzaiubnzabpiyuzauipâz")
-        print(self.alyTeam)
     }
     
     func getConstAlyTeam() -> [Pokemon]
@@ -200,7 +196,18 @@ class Battle
         , damagingMove: MoveDetail
         , receivingPokemon : Pokemon) -> Int
     {
-        return 50
+        var base_dmg : Double = 50
+        
+        for type in damagingPokemon.types!
+        {
+            if type.type?.name == damagingMove.type?.name
+            {
+                base_dmg = base_dmg*1.5
+                print("STAB!")
+            }
+        }
+        
+        return Int(round(base_dmg))
     }
     
     func inflictDamage(pokemon : Pokemon, damageTaken : Int) -> Pokemon
@@ -215,6 +222,11 @@ class Battle
         
     }
     
+    /*func next(team : [Pokemon])
+    {
+        
+    }*/
+    
     func getHPStat(pokemon : Pokemon) -> Stats
     {
         return pokemon.stats![0]
@@ -225,9 +237,9 @@ class Battle
         return pokemon.stats![5]
     }
     
-    func isWinner() -> Bool?
+    func isWinner() -> Bool
     {
-        if enemyTeam.count == 0 || alyTeam.count == 0
+        if(alyTeam.count == 0||enemyTeam.count == 0)
         {
             return true
         }
@@ -239,7 +251,7 @@ class Battle
     
     func didYouWin() -> Bool
     {
-        if enemyTeam.count == 0
+        if(alyTeam.count != 0)
         {
             return true
         }
@@ -248,8 +260,5 @@ class Battle
             return false
         }
     }
-    
-    
-    
     
 }

@@ -14,7 +14,9 @@ struct Pokemon : Codable
     let name : String
     let sprites : Sprites?
     var stats : [Stats]?
-    var moves: [Moves]?
+    var moves : [Moves]?
+    var types : [Types]?
+    
 }
 
 struct Sprites : Codable
@@ -50,6 +52,12 @@ struct MoveDetail : Codable
     var power : Int?
     let type : Type?
 }
+
+struct Types : Codable
+{
+    let type : Type?
+}
+
 
 struct Type : Codable
 {
