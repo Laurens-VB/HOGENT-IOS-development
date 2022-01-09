@@ -29,6 +29,8 @@
 		A6B04EF0278932AF00BD6628 /* GIFLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EEF278932AF00BD6628 /* GIFLoader.swift */; };
 		A6B04EF22789333100BD6628 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EF12789333100BD6628 /* LoadingView.swift */; };
 		A6B04EF42789344000BD6628 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EF32789344000BD6628 /* LoadingViewController.swift */; };
+		A6B04EF9278AA09800BD6628 /* PokemonMoveDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EF8278AA09800BD6628 /* PokemonMoveDetails.swift */; };
+		A6B04EFB278AA96900BD6628 /* PokemonMoveHelperUX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EFA278AA96900BD6628 /* PokemonMoveHelperUX.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		A6B04EEF278932AF00BD6628 /* GIFLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFLoader.swift; sourceTree = "<group>"; };
 		A6B04EF12789333100BD6628 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		A6B04EF32789344000BD6628 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		A6B04EF8278AA09800BD6628 /* PokemonMoveDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonMoveDetails.swift; sourceTree = "<group>"; };
+		A6B04EFA278AA96900BD6628 /* PokemonMoveHelperUX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonMoveHelperUX.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +146,8 @@
 			children = (
 				A6B04EC72783BA0E00BD6628 /* PokemonGenerator.swift */,
 				A6B04EDC2786A65300BD6628 /* PokemonSpriteHelper.swift */,
+				A6B04EF8278AA09800BD6628 /* PokemonMoveDetails.swift */,
+				A6B04EFA278AA96900BD6628 /* PokemonMoveHelperUX.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -252,11 +258,13 @@
 				A6B04ED3278662A800BD6628 /* LaunchView.swift in Sources */,
 				A6B04EDB278692E400BD6628 /* PokemonSelectionViewController.swift in Sources */,
 				A6B04EB227839FC900BD6628 /* PokemonBattleSceneViewController.swift in Sources */,
+				A6B04EF9278AA09800BD6628 /* PokemonMoveDetails.swift in Sources */,
 				A6B04EEC27892E9200BD6628 /* Battle.swift in Sources */,
 				A6B04EEA2788FF9D00BD6628 /* PokemonTrainer.swift in Sources */,
 				A6B04EAE27839FC900BD6628 /* AppDelegate.swift in Sources */,
 				A6B04EDD2786A65300BD6628 /* PokemonSpriteHelper.swift in Sources */,
 				A6B04EE32786E47900BD6628 /* PokemonBattleView.swift in Sources */,
+				A6B04EFB278AA96900BD6628 /* PokemonMoveHelperUX.swift in Sources */,
 				A6B04EDF2786E0FB00BD6628 /* PokemonBattleOptionsView.swift in Sources */,
 				A6B04EB027839FC900BD6628 /* SceneDelegate.swift in Sources */,
 				A6B04EF22789333100BD6628 /* LoadingView.swift in Sources */,

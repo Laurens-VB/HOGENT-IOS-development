@@ -36,3 +36,16 @@ struct Moves: Codable
         let name : String?
     }
 }
+
+struct MoveDetail : Codable
+{
+    let name : String
+    var accuracy : Int?
+    var power : Int?
+    let type : Type?
+}
+
+struct Type : Codable
+{
+    let name : String
+}

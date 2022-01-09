@@ -58,7 +58,6 @@ class PokemonGenerator
             do
             {
                 //Uitroepteken dient om de ontvangen data te unwrappen!
-                print("pain")
                 pokemon = try JSONDecoder().decode(Pokemon.self , from: data)
                 //print(pokemon)
                 
@@ -80,12 +79,10 @@ class PokemonGenerator
     {
         for _ in 1...amount
         {
-            //Random getal genereren tussen 1 en 898, 1 included, 898 included
-            //TO CHECK!
+            //Random getal genereren tussen 1 en 898
             do
             {
                 var entry = Int.random(in: 1...898)
-                //print(entry)
                 var pokemon = try requestPokémon( entry :  entry)
                 repeat
                 {
@@ -93,8 +90,6 @@ class PokemonGenerator
                     pokemon = try requestPokémon( entry :  entry )
                 }
                 while( pokemon.sprites?.front_default == nil || pokemon.sprites?.back_default == nil )
-
-                //print(pokemon)
                 
                 pokemons.append(pokemon)
                 
@@ -129,6 +124,8 @@ class PokemonGenerator
                 {
                     var moveNumber = Int.random(in: 0...pokemon.moves!.count-1)
                     moves.append(pokemon.moves![moveNumber])
+                    
+                    
                     
                 }
             }

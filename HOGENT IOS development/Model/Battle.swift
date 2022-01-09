@@ -10,13 +10,36 @@ import Foundation
 
 class Battle
 {
-    private var alyTeam : [Pokemon] = [Pokemon] ()
-    private var enemyTeam : [Pokemon] = [Pokemon]()
+    private let constAlyTeam : [Pokemon]
+    private let constEnemyTeam : [Pokemon]
     
-    init(alyTeam : [Pokemon], enemyTeam :  [Pokemon])
+    private var alyTeam : [Pokemon]
+    private var enemyTeam : [Pokemon]
+
+    init(alyTeam : [Pokemon])
     {
+        let pokemonGeneratorHelper : PokemonGenerator = PokemonGenerator()
+        var enemyTeam : [Pokemon]? = nil
+        do
+        {
+             enemyTeam = try pokemonGeneratorHelper.genneratePokémons(amount: 3)
+        }
+        catch is Error { }
+        
+        self.constAlyTeam = alyTeam
+        self.constEnemyTeam = enemyTeam!
         self.alyTeam = alyTeam
-        self.enemyTeam = enemyTeam
+        self.enemyTeam = enemyTeam!
+    }
+    
+    func getConstAlyTeam() -> [Pokemon]
+    {
+        return constAlyTeam
+    }
+    
+    func getConstEnemyTeam() -> [Pokemon]
+    {
+        return constEnemyTeam
     }
     
     func getAlyTeam() -> [Pokemon]
@@ -28,6 +51,13 @@ class Battle
     {
         return enemyTeam
     }
+    
+    func shuffleTeams() -> Void
+    {
+        alyTeam.shuffle()
+        enemyTeam.shuffle()
+    }
+    
     
     func start() -> Void
     {

@@ -10,22 +10,51 @@ import UIKit
 
 class PokemonBattleViewController: UIViewController
 {
+    var battle : Battle? = nil
+    
     var pokemonBattleView : PokemonBattleView? = nil
+    
+    let pokemonMoveDetailsHelper : PokemonMoveDetails = PokemonMoveDetails()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        
-        
         print("KOELEKEKOEEE")
+    }
+    
+    func getMoveDetail(idMove : Int) -> MoveDetail
+    {
+        let clickedButton = pokemonBattleView?.pokemonBattleOptions.buttonMoves[idMove]
+        return pokemonMoveDetailsHelper.getMoveDetails(moveName: (clickedButton?.currentTitle)!)!
+    }
+    
+    func colorMove(moveDetail : MoveDetail) -> UIColor
+    {
+        let pokemonMoveHelperUX : PokemonMoveHelperUX = PokemonMoveHelperUX()
+        return pokemonMoveHelperUX.determineLayout(type: moveDetail.type!.name)
     }
 }
 
 //Extension op de PokemonBattleViewController die de PokemonSelectionViewControllerDelegate implementeerd
 extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
 {
-    func highlighted(selection: [Pokemon])
+    func highlighted(selection: [Pokemon]) -> Void
+    {
+        createBattle(alyTeam : selection)
+        battle?.shuffleTeams()
+        
+        generateMoveButtons(selection: (battle?.getAlyTeam())!)
+        generateSprites(selection: selection)
+        
+        view.addSubview(pokemonBattleView!)
+    }
+    
+    func createBattle(alyTeam : [Pokemon]) -> Void
+    {
+        self.battle = Battle(alyTeam : alyTeam)
+    }
+    
+    func generateMoveButtons(selection : [Pokemon]) -> Void
     {
         var moves : [String] = [String]()
         for move in selection[0].moves!
@@ -34,19 +63,22 @@ extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
         }
         
         pokemonBattleView = PokemonBattleView (
-               frame: CGRect(
-                   x : 0
-                   , y : 0
-                   , width : UIScreen.main.bounds.width
-                   , height : UIScreen.main.bounds.height
-               )
-               ,moveNames : moves
-           )
+            frame: CGRect(
+                x : 0
+                , y : 0
+                , width : UIScreen.main.bounds.width
+                , height : UIScreen.main.bounds.height
+            )
+            ,moveNames : moves
+        )
         
-        print("EINDELIJK VIVA ESPAGNA!!!")
         var index = 0
         for button in pokemonBattleView?.pokemonBattleOptions.getButtonMoves() ?? []
         {
+            let moveDetail : MoveDetail = pokemonMoveDetailsHelper.getMoveDetails(moveName : button.currentTitle!)!
+            
+            button.backgroundColor = colorMove(moveDetail : moveDetail)
+            
             let tapGesture = MoveTappedRecognizer(target: self, action : #selector(buttonMovePressed(sender:)))
             
             tapGesture.index = index
@@ -55,23 +87,20 @@ extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
             
             index = index+1
         }
-        
+    }
+    
+    func generateSprites(selection : [Pokemon]) -> Void
+    {
         pokemonBattleView!.pokemonBattleScene.setImagePokemonAly(URL: (selection[0].sprites?.back_default)!)
-        
-        
-        view.addSubview(pokemonBattleView!)
-        
-        
     }
     
     @objc func buttonMovePressed(sender: MoveTappedRecognizer)
     {
-        print(sender.index!)
+        print(getMoveDetail(idMove: sender.index!))
     }
     
-    
-    
-    
-    class MoveTappedRecognizer : UITapGestureRecognizer {
+    class MoveTappedRecognizer : UITapGestureRecognizer
+    {
         var index: Int?
-    }}
+    }
+}
