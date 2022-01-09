@@ -25,6 +25,7 @@
 		A6B04EF9278AA09800BD6628 /* PokemonMoveDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EF8278AA09800BD6628 /* PokemonMoveDetails.swift */; };
 		A6B04EFB278AA96900BD6628 /* PokemonMoveHelperUX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EFA278AA96900BD6628 /* PokemonMoveHelperUX.swift */; };
 		A6B04EFD278AE4A800BD6628 /* PokemonBattleStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EFC278AE4A800BD6628 /* PokemonBattleStatusView.swift */; };
+		A6B04EFF278B589700BD6628 /* TypeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B04EFE278B589700BD6628 /* TypeChart.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		A6B04EF8278AA09800BD6628 /* PokemonMoveDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonMoveDetails.swift; sourceTree = "<group>"; };
 		A6B04EFA278AA96900BD6628 /* PokemonMoveHelperUX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonMoveHelperUX.swift; sourceTree = "<group>"; };
 		A6B04EFC278AE4A800BD6628 /* PokemonBattleStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonBattleStatusView.swift; sourceTree = "<group>"; };
+		A6B04EFE278B589700BD6628 /* TypeChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeChart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			children = (
 				A6B04EC92783BBA600BD6628 /* Structures.swift */,
 				A6B04EEB27892E9200BD6628 /* Battle.swift */,
+				A6B04EFE278B589700BD6628 /* TypeChart.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				A6B04EE52786E5D800BD6628 /* PokemonBattleViewController.swift in Sources */,
 				A6B04ED927868D3700BD6628 /* PokemonSelectionView.swift in Sources */,
 				A6B04EF0278932AF00BD6628 /* GIFLoader.swift in Sources */,
+				A6B04EFF278B589700BD6628 /* TypeChart.swift in Sources */,
 				A6B04ECA2783BBA600BD6628 /* Structures.swift in Sources */,
 				A6B04EC62783A7C400BD6628 /* PokemonBattleSceneView.swift in Sources */,
 				A6B04EDB278692E400BD6628 /* LaunchViewController.swift in Sources */,
