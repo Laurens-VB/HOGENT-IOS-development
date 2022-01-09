@@ -70,7 +70,9 @@ extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
                 , width : UIScreen.main.bounds.width
                 , height : UIScreen.main.bounds.height
             )
-            ,moveNames : moves
+            , moveNames : moves
+            , naamAly : selection![0].name
+            , naamEnemy: (battle?.getEnemyTeam()[0].name)!
         )
         
         var index = 0
@@ -105,67 +107,6 @@ extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
         pokemonBattleView!.pokemonBattleScene.setImagePokemonEnemy(URL: (battle?.getEnemyTeam()[0].sprites?.front_default)!)
     }
     
-    /*
-    func clearButtons()
-    {
-        //Clear buttons als we er hebben
-        if pokemonBattleView?.pokemonBattleOptions.buttonMoves.count != 0
-        {
-            print("clearing buttons!")
-            
-            for index in 0...(pokemonBattleView?.pokemonBattleOptions.buttonMoves.count)!-1
-            {
-                let buttonMove : UIButton = UIButton()
-                pokemonBattleView?.pokemonBattleOptions.buttonMoves[index] = buttonMove
-            }
-            
-            pokemonBattleView?.pokemonBattleOptions.layoutSubviews()
-            
-            print("buttons should be cleared!")
-        }
-    }
-    
-    func rebuildButtons()
-    {
-        print("rebuilding buttons")
-        print(pokemonBattleView?.pokemonBattleOptions.buttonMoves[0].currentTitle)
-        
-        var selection = battle?.getAlyTeam()
-        
-        var moves : [String] = [String]()
-        for move in selection![0].moves!
-        {
-            moves.append((move.move?.name)!)
-        }
-        
-        for (index, move) in moves.enumerated()
-        {
-            pokemonBattleView?.pokemonBattleOptions.buttonMoves[index].setTitle(move, for: .normal)
-        }
-        
-        print(pokemonBattleView?.pokemonBattleOptions.buttonMoves[0].currentTitle)
-        
-        var index = 0
-        for button in pokemonBattleView?.pokemonBattleOptions.getButtonMoves() ?? []
-        {
-            let moveDetail : MoveDetail = pokemonMoveDetailsHelper.getMoveDetails(moveName : button.currentTitle!)!
-            
-            button.backgroundColor = colorMove(moveDetail : moveDetail)
-            
-            let tapGesture = MoveTappedRecognizer(target: self, action : #selector(buttonMovePressed(sender:)))
-            
-            tapGesture.index = index
-            
-            button.addGestureRecognizer(tapGesture)
-            
-            index = index+1
-        }
-        
-        pokemonBattleView?.pokemonBattleOptions.layoutSubviews()
-        
-    }
- 
- */
     func remakeButtons()
     {
         pokemonBattleView?.pokemonBattleOptions.clearButtons()
@@ -198,19 +139,53 @@ extension PokemonBattleViewController : PokemonSelectionViewControllerDelegate
             index = index+1
         }
     }
+    
+    func updateHP() -> Void
+    {
+        pokemonBattleView?.pokemonBattleScene.alyStatusView.updateHPBar(currentHP: (battle?.getAlyTeam()[0].stats?[0].base_stat)!
+            , baseHP: (battle?.getConstAlyTeam()[0].stats?[0].base_stat)!)
+        
+        pokemonBattleView?.pokemonBattleScene.alyStatusView.updateHPBar(currentHP: (battle?.getEnemyTeam()[0].stats?[0].base_stat)!
+        , baseHP: (battle?.getConstEnemyTeam()[0].stats?[0].base_stat)!)
+    }
+    
+    func renewStatusBar(isAly : Bool) -> Void
+    {
+        var naam : String? = nil
+        
+        if isAly
+        {
+            naam = battle?.getAlyTeam()[0].name
+        }
+        else
+        {
+            naam = battle?.getEnemyTeam()[0].name
+            
+        }
+        
+        pokemonBattleView?.pokemonBattleScene.newStatusView(
+            naam : naam!
+            , isAlly: isAly)
+    }
+    
     func turnUI() -> Void
     {
+        updateHP()
         print("TURNUI")
         
         if ( (battle?.getAlyFainted())! || (battle?.getEnemyFainted())! )
         {
-            print("JOINK JOINK JOINK SOME1 FAINTED")
             generateSprites()
-            
             remakeButtons()
-            
-            //clearButtons()
-            //rebuildButtons()
+        }
+        
+        if (battle?.getAlyFainted())!
+        {
+            renewStatusBar(isAly: true)
+        }
+        else
+        {
+            renewStatusBar(isAly: false)
         }
     }
     

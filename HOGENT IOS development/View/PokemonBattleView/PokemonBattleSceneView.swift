@@ -44,8 +44,22 @@ class PokemonBattleSceneView: UIView
         return imageViewEnemyDisc
     }()
     
-    override init(frame : CGRect)
+    public var alyStatusView : PokemonBattleStatusView
+    
+    public var enemyStatusView : PokemonBattleStatusView
+    
+    init(frame : CGRect, naamAly : String, naamEnemy : String)
     {
+        alyStatusView = {
+            let alyStatusView = PokemonBattleStatusView(frame: frame, naam : naamAly)
+            return alyStatusView
+        }()
+        
+        enemyStatusView = {
+            let alyStatusView = PokemonBattleStatusView(frame: frame, naam : naamEnemy)
+            return alyStatusView
+        }()
+        
         super.init(frame : frame)
         backgroundColor = .cyan
     }
@@ -91,12 +105,27 @@ class PokemonBattleSceneView: UIView
             , height: 125
         )
         
+        alyStatusView.frame = CGRect(
+            x : frame.size.width - 210
+            , y : frame.size.height - 100
+            , width: 200
+            , height: 50
+        )
+        
+        enemyStatusView.frame = CGRect(
+            x : 10
+            , y : 62.5
+            , width: 200
+            , height: 50
+        )
+        
         addSubview(imageViewBattleBackDrop)
         addSubview(imageViewAlyDisc)
         addSubview(imageViewEnemyDisc)
         addSubview(imageViewEnemy)
         addSubview(imageViewAly)
-        
+        addSubview(alyStatusView)
+        addSubview(enemyStatusView)
     }
     
     func setImagePokemonAly(URL : String)
@@ -131,5 +160,23 @@ class PokemonBattleSceneView: UIView
         layoutSubviews()
         
         print("images should be cleared!")
+    }
+    
+    func newStatusView(naam : String, isAlly : Bool)
+    {
+        if isAlly
+        {
+            alyStatusView = {
+                let alyStatusView = PokemonBattleStatusView(frame: frame, naam : naam)
+                return alyStatusView
+            }()
+        }
+        else
+        {
+            enemyStatusView = {
+                let enemyStatusView = PokemonBattleStatusView(frame: frame, naam : naam)
+                return enemyStatusView
+            }()
+        }
     }
 }

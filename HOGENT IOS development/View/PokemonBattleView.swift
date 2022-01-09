@@ -20,16 +20,16 @@ class PokemonBattleView: UIView {
     
     var pokemonBattleOptions : PokemonBattleOptionsView
     
-    let pokemonBattleScene : PokemonBattleSceneView =
-    {
-        let pokemonBattleScene : PokemonBattleSceneView = PokemonBattleSceneView()
-        return pokemonBattleScene
-        
-    }()
+    let pokemonBattleScene : PokemonBattleSceneView
     
-    init(frame : CGRect, moveNames : [String])
+    init(frame : CGRect, moveNames : [String]
+        , naamAly : String
+        , naamEnemy : String)
     {
-        print(moveNames)
+        pokemonBattleScene = PokemonBattleSceneView(frame : frame
+            , naamAly : naamAly
+            , naamEnemy : naamEnemy)
+        
         pokemonBattleOptions = {
             let pokemonBattleOptions : PokemonBattleOptionsView = PokemonBattleOptionsView(frame : frame, moveNames: moveNames)
             return pokemonBattleOptions

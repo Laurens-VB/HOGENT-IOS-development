@@ -17,7 +17,7 @@ class PokemonBattleOptionsView: UIView
     init(frame : CGRect, moveNames : [String])
     {
         super.init(frame : frame)
-        backgroundColor = .red
+        backgroundColor = UIColor(red : 53/255, green : 56/255, blue : 54/255, alpha : 1)
         self.moveNames = moveNames
         
         for moveName in moveNames
@@ -55,6 +55,11 @@ class PokemonBattleOptionsView: UIView
         //buttons = [UIButton, UIButton, UIButton, UIButton, UIButton, UIButton]
         for buttonMove in buttonMoves
         {
+            buttonMove.titleLabel?.adjustsFontSizeToFitWidth = true
+            buttonMove.layer.borderWidth = 2
+            buttonMove.layer.borderColor = UIColor.white.cgColor
+            buttonMove.layer.cornerRadius = 10
+            
             if isOneven
             {
                 buttonMove.frame = CGRect(

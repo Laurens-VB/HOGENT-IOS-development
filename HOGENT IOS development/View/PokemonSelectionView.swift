@@ -7,6 +7,7 @@
 //
 import UIKit
 
+// = Wordt gebruikt als LaunchView
 class PokemonSelectionView: UIView {
 
     /*
@@ -38,7 +39,7 @@ class PokemonSelectionView: UIView {
     override init(frame : CGRect)
     {
         super.init(frame : frame)
-        backgroundColor = .cyan
+        backgroundColor = UIColor(red : 53/255, green : 56/255, blue : 54/255, alpha : 1)
         
     }
     
@@ -98,6 +99,7 @@ class PokemonSelectionView: UIView {
                 imageView.layer.cornerRadius = 20
                 imageView.layer.masksToBounds = true
                 imageView.contentMode = .scaleToFill
+                imageView.backgroundColor = UIColor(red : 164/255, green : 176/255, blue : 171/255, alpha : 1)
                 
             return imageView
             }()
