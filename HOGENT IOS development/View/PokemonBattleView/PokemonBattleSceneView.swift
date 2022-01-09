@@ -64,28 +64,28 @@ class PokemonBattleSceneView: UIView
         )
         
         imageViewAlyDisc.frame = CGRect(
-            x : 0
+            x : -90
             , y : frame.size.height - 100
             , width : 300
             , height : 100
         )
         
         imageViewEnemyDisc.frame = CGRect(
-            x : frame.size.width - 270
+            x : frame.size.width - 180
             , y : 62.5
             , width : 270
             , height : 90
         )
         
         imageViewAly.frame = CGRect(
-            x : imageViewAlyDisc.frame.maxX/4
+            x : (imageViewAlyDisc.frame.maxX/4) - 50
             , y : frame.size.height - 150
             , width : 150
             , height : 150
         )
         
         imageViewEnemy.frame = CGRect(
-            x : frame.size.width - 150 - (imageViewEnemyDisc.frame.maxX/8)
+            x : frame.size.width - 80 - (imageViewEnemyDisc.frame.maxX/8)
             , y : 62.5 - (90/2)
             , width: 125
             , height: 125
@@ -119,5 +119,17 @@ class PokemonBattleSceneView: UIView
             try imageViewEnemy = pokemonSpriteHelper.setImage(from : URL)!
         }
         catch is Error { }
+    }
+    
+    func clearImages()
+    {
+        print("clearing images!")
+        
+        imageViewAly = UIImageView()
+        imageViewEnemy = UIImageView()
+        
+        layoutSubviews()
+        
+        print("images should be cleared!")
     }
 }

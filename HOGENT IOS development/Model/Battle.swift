@@ -15,7 +15,12 @@ class Battle
     
     private var alyTeam : [Pokemon]
     private var enemyTeam : [Pokemon]
-
+    
+    private let pokemonMoveDetailsHelper : PokemonMoveDetails = PokemonMoveDetails()
+    
+    private var alyFainted : Bool = false
+    private var enemyFainted : Bool = false
+    
     init(alyTeam : [Pokemon])
     {
         let pokemonGeneratorHelper : PokemonGenerator = PokemonGenerator()
@@ -52,6 +57,25 @@ class Battle
         return enemyTeam
     }
     
+    func getAlyFainted() -> Bool
+    {
+        return alyFainted
+    }
+    
+    func getEnemyFainted() -> Bool
+    {
+        return enemyFainted
+    }
+    
+    func falsifyAlyFainted() -> Void
+    {
+        alyFainted = false
+    }
+    
+    func falsifyEnemyFainted() -> Void
+    {
+        enemyFainted = false
+    }
     func shuffleTeams() -> Void
     {
         print(alyTeam)
@@ -66,11 +90,152 @@ class Battle
             //Not Yet implemented
     }
     
-    func turn() -> Void
+    func turn(alyPokemon : Pokemon
+        , alyMove : MoveDetail ) -> Void
     {
-        //not yet implemented
+        print("Turn Started")
+        
+        var enemyPokemon = enemyTeam[0]
+        
+        let enemyMove = pokemonMoveDetailsHelper.getMoveDetails(moveName :    (enemyPokemon.moves?.shuffled()[0].move?.name)!)
+        
+        print("Aly Team: ")
+        print(alyTeam[0].stats![0].base_stat)
+        
+        print("Enemy Team: ")
+        print(enemyTeam[0].stats![0].base_stat)
+        
+        // ?? is voor default value, want we werken met Int?
+        if (getSPEEDStat(pokemon : alyPokemon).base_stat ?? 0 > getSPEEDStat(pokemon: enemyPokemon).base_stat ?? 0)
+            //ALLY is sneller
+        {
+            var damage = calculateDamage(damagingPokemon: alyPokemon
+                , damagingMove: alyMove
+                , receivingPokemon: enemyPokemon)
+            
+            print("damage on enemy")
+            print(damage)
+            
+            enemyTeam[0] = inflictDamage(pokemon: enemyPokemon, damageTaken: damage)
+            
+            print("HP ENEMY")
+            print(getHPStat(pokemon: enemyTeam[0]).base_stat!)
+            
+            if( getHPStat(pokemon: enemyTeam[0]).base_stat! <= 0)
+            {
+                print("enemy ded")
+                enemyTeam.removeFirst()
+                print(enemyTeam[0].name)
+                enemyFainted = true
+            }
+            
+            //Als enemy nog leeft!
+            if !enemyFainted
+            {
+                damage = calculateDamage(damagingPokemon: enemyPokemon
+                    , damagingMove: enemyMove!
+                    , receivingPokemon: alyPokemon)
+                
+                print("damage on aly")
+                print(damage)
+                
+                alyTeam[0] = inflictDamage(pokemon: alyPokemon, damageTaken: damage)
+
+                if( getHPStat(pokemon: alyTeam[0]).base_stat! <= 0)
+                {
+                    print("Aly fainted")
+                    alyTeam.removeFirst()
+                    print(alyTeam[0].name)
+                    alyFainted = true
+                }
+            }
+        }
+        
+        if (getSPEEDStat(pokemon : enemyPokemon).base_stat ?? 0 > getSPEEDStat(pokemon : alyPokemon).base_stat ?? 0
+            || getSPEEDStat(pokemon : enemyPokemon).base_stat ?? 0 == getSPEEDStat(pokemon : alyPokemon).base_stat ?? 0)
+            //ENEMY is sneller
+        {
+            var damage = calculateDamage(damagingPokemon: enemyPokemon
+                , damagingMove: enemyMove!
+                , receivingPokemon: alyPokemon)
+            
+            print("damage on aly")
+            print(damage)
+            
+            alyTeam[0] = inflictDamage(pokemon: alyPokemon, damageTaken: damage)
+            
+            if !( (getHPStat(pokemon: alyTeam[0] ).base_stat!) > 0)
+            {
+                print("ALY FAINTED!")
+                alyTeam.removeFirst()
+                print(alyTeam[0].name)
+                alyFainted = true
+            }
+            
+            if !alyFainted
+            {
+                damage = calculateDamage(damagingPokemon: alyPokemon
+                    , damagingMove: alyMove
+                    , receivingPokemon: enemyPokemon)
+                
+                print("damage on enemy")
+                print(damage)
+                
+                enemyTeam[0] = inflictDamage(pokemon: enemyPokemon, damageTaken: damage)
+                
+                print("HP ENEMY")
+                print(getHPStat(pokemon: enemyTeam[0]).base_stat!)
+                
+                if !( (getHPStat(pokemon: enemyTeam[0]).base_stat!) > 0)
+                {
+                    print("ENEMY FAINTED!")
+                    enemyTeam.removeFirst()
+                    print(enemyTeam[0].name)
+                    enemyFainted = true
+                }
+            }
+        }
+        
+        print("Aly Team: ")
+        print(alyTeam[0].stats![0].base_stat)
+        
+        print("Enemy Team: ")
+        print(enemyTeam[0].stats![0].base_stat)
     }
     
+    func calculateDamage(damagingPokemon : Pokemon
+        , damagingMove: MoveDetail
+        , receivingPokemon : Pokemon) -> Int
+    {
+        return 50
+    }
+    
+    func inflictDamage(pokemon : Pokemon, damageTaken : Int) -> Pokemon
+    {
+        var pokemon = pokemon
+        
+        // 0 is de HP stat
+        var hpStat = getHPStat(pokemon: pokemon)
+        hpStat.base_stat = hpStat.base_stat! - damageTaken
+        pokemon.stats![0] = hpStat
+        return pokemon
+        
+    }
+    
+    /*func next(team : [Pokemon])
+    {
+        
+    }*/
+    
+    func getHPStat(pokemon : Pokemon) -> Stats
+    {
+        return pokemon.stats![0]
+    }
+    
+    func getSPEEDStat(pokemon : Pokemon) -> Stats
+    {
+        return pokemon.stats![5]
+    }
     
     
 }

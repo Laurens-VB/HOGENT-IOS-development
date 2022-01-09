@@ -13,18 +13,24 @@ struct Pokemon : Codable
 {
     let name : String
     let sprites : Sprites?
-    //let stats : Stats
+    var stats : [Stats]?
     var moves: [Moves]?
-    
-    struct Sprites : Codable
-    {
-        let back_default, front_default : String?
-    }
-    
-    struct Stats : Codable
-    {
-        let base_stat : Int?
-    }
+}
+
+struct Sprites : Codable
+{
+    let back_default, front_default : String?
+}
+
+struct Stats : Codable
+{
+    var base_stat : Int?
+    let stat : Stat
+}
+
+struct Stat : Codable
+{
+    let name : String?
 }
 
 struct Moves: Codable

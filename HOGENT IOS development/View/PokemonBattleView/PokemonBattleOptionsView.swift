@@ -84,4 +84,38 @@ class PokemonBattleOptionsView: UIView
     {
         return buttonMoves
     }
+    
+    func clearButtons()
+    {
+        //Clear buttons als we er hebben
+        if buttonMoves.count != 0
+        {
+            print("clearing buttons!")
+            
+            for index in 0...buttonMoves.count-1
+            {
+                let buttonMove : UIButton = UIButton()
+                buttonMoves[index] = buttonMove
+            }
+            
+            layoutSubviews()
+            
+            print("buttons should be cleared!")
+        }
+    }
+
+    func rebuildButtons(moves : [String])
+    {
+        print("rebuilding buttons")
+        print(buttonMoves[0].currentTitle)
+
+        for (index, move) in moves.enumerated()
+        {
+            buttonMoves[index].setTitle(move, for: .normal)
+        }
+        
+        print(buttonMoves[0].currentTitle)
+        
+        layoutSubviews()
+    }
 }

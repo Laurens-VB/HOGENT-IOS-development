@@ -36,15 +36,11 @@ class PokemonGenerator
         
         var pokemon : Pokemon = Pokemon(
             name : ""
-            , sprites : Pokemon.Sprites(back_default: "", front_default: "")
-            //, stats : Pokemon.Stats(base_stat: 1)
+            , sprites : Sprites(back_default: "", front_default: "")
+            , stats : [Stats]()
             //, moves : [Pokemon.Moves(move: Pokemon.Moves.Move(name : ""))]
             , moves: [Moves]()
         )
-        
-        print(pokemon)
-        
-        print("xD")
         
         //Aanmaken & instellen van de task, taak die we met het request wensen uit te voeren:
         let task = URLSession.shared.dataTask(with: request)
@@ -79,14 +75,14 @@ class PokemonGenerator
     {
         for _ in 1...amount
         {
-            //Random getal genereren tussen 1 en 898
+            //Random getal genereren tussen 1 en 649
             do
             {
-                var entry = Int.random(in: 1...898)
+                var entry = Int.random(in: 1...649)
                 var pokemon = try requestPokémon( entry :  entry)
                 repeat
                 {
-                    entry = Int.random(in: 1...898)
+                    entry = Int.random(in: 1...649)
                     pokemon = try requestPokémon( entry :  entry )
                 }
                 while( pokemon.sprites?.front_default == nil || pokemon.sprites?.back_default == nil )
